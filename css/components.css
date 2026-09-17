@@ -1,0 +1,156 @@
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-family: var(--font-main);
+  font-weight: 600;
+  font-size: 1.05rem;
+  padding: 14px 28px;
+  border-radius: var(--radius-pill);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.btn-white {
+  background-color: var(--white);
+  color: var(--blue);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.15);
+}
+
+.btn-white:hover {
+  background-color: #F0F6FF;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.22);
+}
+
+.btn-primary {
+  background-color: var(--blue);
+  color: var(--white);
+  box-shadow: 0 4px 18px rgba(0, 98, 210, 0.35);
+}
+
+.btn-primary:hover {
+  background-color: var(--blue-hover);
+  transform: translateY(-2px);
+}
+
+/* Circular Arrow Buttons */
+.btn-circle-arrow {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.btn-circle-arrow.dark-btn {
+  background: var(--dark);
+  color: var(--white);
+}
+
+.btn-circle-arrow.white-btn {
+  background: var(--white);
+  color: var(--blue);
+}
+
+.btn-circle-arrow.glass-btn {
+  background: rgba(255, 255, 255, 0.2);
+  color: var(--white);
+}
+
+.btn-circle-arrow.light-gray-btn {
+  background: rgba(39, 41, 43, 0.08);
+  color: var(--dark);
+}
+
+.btn-circle-arrow svg {
+  width: 20px;
+  height: 20px;
+  transition: transform var(--transition-fast);
+}
+
+.card-interactive {
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  cursor: pointer;
+}
+
+.card-interactive:hover {
+  transform: translateY(-4px);
+}
+
+.card-interactive:hover .btn-circle-arrow svg {
+  transform: translate(2px, -2px);
+}
+
+/* Chips & Tags */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  border-radius: var(--radius-pill);
+  font-size: 0.95rem;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  color: var(--dark);
+}
+
+.chip-cyan {
+  background-color: var(--cyan);
+}
+
+.chip-lavender {
+  background-color: var(--lavender);
+}
+
+.chip-mint {
+  background-color: var(--teal-mint);
+}
+
+.chip-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  background: rgba(39, 41, 43, 0.08);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--dark);
+}
+
+.chip-tag-light {
+  background: rgba(255, 255, 255, 0.18);
+  color: var(--white);
+}
+
+/* Lanyards for Partner Cards */
+.lanyard-strap {
+  width: 16px;
+  height: 48px;
+  background: linear-gradient(90deg, #134591 0%, #287bf0 50%, #134591 100%);
+  border-radius: 4px;
+  position: relative;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.35);
+  margin-bottom: -10px;
+  z-index: 2;
+}
+
+.lanyard-clasp {
+  width: 24px;
+  height: 12px;
+  background: linear-gradient(180deg, #B8C2CC 0%, #8A96A3 100%);
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+  position: relative;
+  z-index: 3;
+}

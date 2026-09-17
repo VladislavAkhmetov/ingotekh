@@ -1,0 +1,10 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="305" height="280" viewBox="0 0 305 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path id="Card_Shape" d="M305 220C305 231.046 296.046 240 285 240H280C268.954 240 260 248.954 260 260C260 271.046 251.046 280 240 280H20C8.9543 280 0 271.046 0 260V20C0 8.95431 8.9543 0 20 0H285C296.046 0 305 8.95431 305 20V220Z" fill="url(#paint0_linear_0_203)"/>
+<defs>
+<linearGradient id="paint0_linear_0_203" x1="40.1567" y1="4.87239" x2="-59.4172" y2="290.346" gradientUnits="userSpaceOnUse">
+<stop stop-color="#0062D2"/>
+<stop offset="0.5" stop-color="#25B6E2"/>
+<stop offset="1" stop-color="#0CDAC5"/>
+</linearGradient>
+</defs>
+</svg>

@@ -1,0 +1,8 @@
+*, *::before, *::after { box-sizing: border-box; border-width: 0; border-style: solid; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--dark); color: var(--white); font-family: 'IngoStem', sans-serif; font-size: 16px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+p, h1, h2, h3 { margin: 0; }
+img { display: block; max-width: 100%; }
+.landing-canvas { width: 1440px; margin: 0 auto; }
+/* Fixed desktop composition. Mobile layout will be designed separately. */
+@media (max-width: 1440px) { .landing-canvas { margin: 0; } }

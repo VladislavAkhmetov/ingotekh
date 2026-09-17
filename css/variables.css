@@ -1,0 +1,47 @@
+:root {
+  /* Brand Palette from Figma */
+  --blue: #0062D2;
+  --blue-hover: #004FB0;
+  --blue-quote: #287BF0;
+  --blue-light: #3999FF;
+  --blue-highlight: #388BFD;
+  --dark: #27292B;
+  --dark-surface: #1E2022;
+  --dark-card: #2F3235;
+  --lime: #9EFF00;
+  --lime-hover: #8EE600;
+  --cyan: #33C9FF;
+  --teal: #00DDB3;
+  --teal-mint: #0CDAC5;
+  --lavender: #A090FF;
+  --periwinkle: #8388F7;
+  --white: #FFFFFF;
+
+  /* Text colors on dark */
+  --text-white: #FFFFFF;
+  --text-muted: rgba(255, 255, 255, 0.7);
+  --text-dim: rgba(255, 255, 255, 0.45);
+  --text-dark: #27292B;
+
+  /* Typography */
+  --font-main: 'IngoStem', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Roboto Mono', monospace;
+
+  /* Layout */
+  --max-w: 1280px;
+  --side-pad: 32px;
+  --section-pad: 96px;
+
+  /* Border Radii */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --radius-hero: 40px;
+  --radius-pill: 9999px;
+
+  /* Transitions */
+  --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-normal: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-slow: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}

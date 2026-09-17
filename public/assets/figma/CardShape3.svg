@@ -1,0 +1,13 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="305" height="426" viewBox="0 0 305 426" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Card_Shape">
+<path d="M305 396C305 412.569 291.569 426 275 426H30C13.4315 426 0 412.569 0 396V109C0 92.4315 13.4315 79 30 79H31C47.5685 79 61 65.5685 61 49V30C61 13.4315 74.4315 0 91 0H275C291.569 0 305 13.4315 305 30V396Z" fill="#0062D2"/>
+<path d="M305 396C305 412.569 291.569 426 275 426H30C13.4315 426 0 412.569 0 396V109C0 92.4315 13.4315 79 30 79H31C47.5685 79 61 65.5685 61 49V30C61 13.4315 74.4315 0 91 0H275C291.569 0 305 13.4315 305 30V396Z" fill="url(#paint0_linear_0_175)"/>
+</g>
+<defs>
+<linearGradient id="paint0_linear_0_175" x1="24.5929" y1="71.5911" x2="280" y2="375" gradientUnits="userSpaceOnUse">
+<stop stop-color="#0062D2"/>
+<stop offset="0.5" stop-color="#5079E9"/>
+<stop offset="1" stop-color="#A090FF"/>
+</linearGradient>
+</defs>
+</svg>
