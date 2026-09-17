@@ -1,0 +1,41 @@
+/* Full-bleed surfaces; the original 1440px composition stays centered. */
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+body { overflow-x: clip; }
+.landing-canvas { width: 100%; margin: 0; }
+.landing-1 > [id] { width: 100%; }
+.section-composition { position: relative; width: 1440px; height: 100%; margin-inline: auto; }
+#footer .union-768 { left: calc((1440px - 100vw) / 2); width: 100vw; }
+@media (max-width: 1440px) { #footer .union-768 { left: 0; } }
+#header { position: fixed; inset: 0 0 auto; height: 80px; z-index: 30; background: transparent; overflow: visible; }
+#header::before { content: ''; position: absolute; inset: 0; background: rgb(0 98 210 / .36); -webkit-backdrop-filter: blur(24px) saturate(145%); backdrop-filter: blur(24px) saturate(145%); opacity: 0; transition: opacity .24s ease-out; }
+#header.is-docked::before, #header:focus-within::before { opacity: 1; }
+#header .layer-3 { width: 1280px; top: 30px; }
+#header .logo_ingotech-4 { opacity: 0; }
+#header.is-docked .logo_ingotech-4 { opacity: 1; filter: blur(0); }
+#header .layer-7 { opacity: 0; filter: blur(6px); transform: translateY(-3px); transition: opacity .22s ease-out, filter .3s ease-out, transform .3s ease-out; pointer-events: none; }
+#header.is-revealed .layer-7, #header:focus-within .layer-7 { opacity: 1; filter: blur(0); transform: none; pointer-events: auto; }
+#header a { color: inherit; text-decoration: none; }
+#header a:hover { opacity: .75; }
+a:focus-visible { outline: 2px solid currentColor; outline-offset: 6px; }
+#hero { height: 100vh; height: 100svh; overflow: clip; }
+#hero .section-composition { height: 705px; position: absolute; left: 50%; top: 50%; margin: 0; transform: translate(-50%, -50%) translateY(35px) scale(var(--hero-scale, 1)); }
+.hero_logo-15 { opacity: 1; }
+.flying-logo { position: fixed; left: 0; top: 0; width: 1107px; height: 180px; transform-origin: 0 0; z-index: 40; pointer-events: none; visibility: hidden; }
+.flying-logo img { width: 100%; height: 100%; }
+#hero.logo-in-flight .hero_logo-15, #header.logo-in-flight .logo_ingotech-4 { opacity: 0; }
+#hero.is-docked .hero_logo-15 { opacity: 0; }
+.hero_logo-15 img { animation: logo-arrival 1.15s cubic-bezier(.22,1,.36,1) both; }
+#hero .layer-18, #hero .hero_cta-31 { animation: content-arrival 1.15s cubic-bezier(.22,1,.36,1) both; }
+#hero .layer-14, #hero .layer-34 { animation: art-arrival 1.4s cubic-bezier(.22,1,.36,1) both; }
+#hero [data-name^="Hero_Tag"] { animation: content-arrival 1.2s .08s cubic-bezier(.22,1,.36,1) both; }
+@keyframes art-arrival { from { opacity: 0; transform: translateY(20px) scale(.96); } to { opacity: 1; transform: none; } }
+#office .layer-712, #office .office_cta_button-717 { z-index: 2; }
+#office .layer-708, #office .layer-710, #office .layer-713, #office .layer-715 { will-change: transform, opacity; pointer-events: none; }
+@keyframes content-arrival { from { opacity: 0; filter: blur(12px); } to { opacity: 1; filter: blur(0); } }
+@keyframes logo-arrival { from { opacity: 0; filter: blur(22px); transform: scale(1.035); } to { opacity: 1; filter: blur(0); transform: scale(1); } }
+.hero_cta-31 { text-decoration: none; transition: box-shadow .25s, background .25s; }
+.hero_cta-31:hover { background: #eef8ff; box-shadow: 0 8px 30px #003c8c40; }
+.motion-layer { will-change: transform; }
+@media (max-width: 1440px) { .section-composition { margin-left: 0; } #header .section-composition { width: 100%; } #header .layer-3 { left: 5.55%; width: 88.9%; } #header .layer-7 { gap: clamp(12px, 3vw, 60px); font-size: clamp(12px, 1.4vw, 20px); } }
+@media (max-width: 640px) { #header, #header .section-composition { height: 80px; } #header .layer-3 { top: 14px; align-items: flex-start; } #header .layer-7 { padding-top: 34px; position: absolute; width: 100%; justify-content: space-between; gap: 8px; font-size: 11px; } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation: none !important; transition: none !important; } }
