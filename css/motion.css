@@ -1,0 +1,163 @@
+/* Full-bleed surfaces; the original 1440px composition stays centered. */
+/* Above 1440px the composition scales so its 80px side gutters stay 80px. */
+:root { --page-scale: 1; }
+html { scroll-behavior: smooth; scroll-padding-top: calc(80px * var(--page-scale)); }
+body { overflow-x: clip; }
+.landing-canvas { width: 100%; margin: 0; }
+.landing-1 > [id] { width: 100%; }
+.section-composition { position: relative; width: 1440px; height: 100%; margin-inline: auto; }
+#footer .union-768 { left: calc((1440px - 100vw) / 2); width: 100vw; }
+@media (max-width: 1440px) { #footer .union-768 { left: 0; } }
+@media (min-width: 1441px) {
+  .landing-1 > [id]:not(#hero) { zoom: var(--page-scale); }
+  .landing-1 > [id]:not(#hero) > .section-composition { margin-left: calc(50% - 720px); margin-right: 0; }
+  /* Local px are zoomed, so divide the viewport width back into composition units. */
+  #footer .union-768 { left: calc((1440px - var(--viewport-width, 100vw) / var(--page-scale)) / 2); width: calc(var(--viewport-width, 100vw) / var(--page-scale)); }
+}
+#header { position: fixed; inset: 0 0 auto; height: 80px; z-index: 30; background: transparent; overflow: visible; }
+/* Background, logo and navigation share one state and one timing. */
+#header::before { content: ''; position: absolute; inset: 0; background: rgb(0 98 210 / .36); -webkit-backdrop-filter: blur(24px) saturate(145%); backdrop-filter: blur(24px) saturate(145%); opacity: 0; transition: opacity .3s ease-out; }
+#header.is-revealed::before, #header:focus-within::before { opacity: 1; }
+#header .layer-3 { width: 1280px; top: 30px; }
+#header .logo_ingotech-4, #header .layer-7 { opacity: 0; filter: blur(6px); transform: translateY(-3px); transition: opacity .3s ease-out, filter .3s ease-out, transform .3s ease-out; pointer-events: none; }
+#header.is-revealed .logo_ingotech-4, #header.is-revealed .layer-7, #header:focus-within .logo_ingotech-4, #header:focus-within .layer-7 { opacity: 1; filter: blur(0); transform: none; pointer-events: auto; }
+#header a { color: inherit; text-decoration: none; }
+#header a:hover { opacity: .75; }
+a:focus-visible { outline: 2px solid currentColor; outline-offset: 6px; }
+#hero { height: 100vh; height: 100svh; overflow: clip; }
+/* Anchored to the same left gutter as the sections below, even when height limits the scale. */
+#hero .section-composition { height: 705px; position: absolute; left: var(--hero-left, 0px); top: 50%; margin: 0; transform-origin: 0 50%; transform: translateY(-50%) translateY(35px) scale(var(--hero-scale, 1)); }
+.hero_logo-15 { will-change: opacity, filter; }
+.hero_logo-15 img { animation: logo-arrival 1.15s cubic-bezier(.22,1,.36,1) both; }
+#hero .layer-18, #hero .hero_cta-31 { animation: content-arrival 1.15s cubic-bezier(.22,1,.36,1) both; }
+#hero .layer-14, #hero .layer-34 { animation: art-arrival 1.4s cubic-bezier(.22,1,.36,1) both; }
+#hero [data-name^="Hero_Tag"] { animation: content-arrival 1.2s .08s cubic-bezier(.22,1,.36,1) both; }
+#hero .hero-tag--digital { animation-delay: .22s; }
+#hero .hero-tag--ai { animation-delay: .38s; }
+@keyframes art-arrival { from { opacity: 0; transform: translateY(20px) scale(.96); } to { opacity: 1; transform: none; } }
+#office .layer-712, #office .office_cta_button-717 { z-index: 2; }
+#office .layer-708, #office .layer-710, #office .layer-713, #office .layer-715 { will-change: transform, opacity; pointer-events: none; }
+@keyframes content-arrival { from { opacity: 0; filter: blur(12px); } to { opacity: 1; filter: blur(0); } }
+@keyframes logo-arrival { from { opacity: 0; filter: blur(22px); transform: scale(1.035); } to { opacity: 1; filter: blur(0); transform: scale(1); } }
+.motion-layer { will-change: transform; }
+@media (max-width: 1440px) { .section-composition { margin-left: 0; } #header .section-composition { width: 100%; } #header .layer-3 { left: 5.55%; width: 88.9%; } #header .layer-7 { gap: clamp(12px, 3vw, 60px); font-size: clamp(12px, 1.4vw, 20px); } }
+@media (max-width: 640px) { #header, #header .section-composition { height: 80px; } #header .layer-3 { top: 14px; align-items: flex-start; } #header .layer-7 { padding-top: 34px; position: absolute; width: 100%; justify-content: space-between; gap: 8px; font-size: 11px; } }
+.mascot-card { cursor: pointer; }
+.mascot-frame { overflow: visible; pointer-events: auto; }
+.mascot-frame-ficha { position: absolute; left: calc(8.33% + 90px); top: 389px; width: 284px; height: 325px; }
+.mascot-frame-tim { position: absolute; left: calc(41.67% + 17px); top: 371px; width: 288px; height: 347px; }
+.mascot-frame svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.mascot-fix .layer-431 { overflow: visible; pointer-events: auto; }
+.mascot-fix .chika { overflow: visible; }
+.chika-shadow, .ficha-shadow, .tim-shadow { display: none; }
+.mascot-fix .chika-wing,
+.mascot-fix .chika-tail,
+.mascot-fix .chika-antenna,
+.mascot-fix .chika-leg,
+.mascot-fix .chika-rig { transform-box: fill-box; }
+.mascot-fix .chika-wing-left { transform-origin: 92% 42%; }
+.mascot-fix .chika-wing-right { transform-origin: 8% 62%; }
+.mascot-fix .chika-tail { transform-origin: 8% 35%; }
+.mascot-fix .chika-antenna { transform-origin: 8% 100%; }
+.mascot-fix .chika-leg-left,
+.mascot-fix .chika-leg-right { transform-origin: 50% 0; }
+.mascot-fix .chika-rig { transform-origin: 50% 100%; }
+.mascot-fix .avatar_shadow-433 { transform-origin: 50% 50%; }
+.mascot-fix:hover .chika-wing-left,
+.mascot-fix:has(:hover) .chika-wing-left { animation: chika-flap-left .42s ease-in-out infinite alternate; }
+.mascot-fix:hover .chika-wing-right,
+.mascot-fix:has(:hover) .chika-wing-right { animation: chika-flap-right .42s ease-in-out infinite alternate; }
+.mascot-fix:hover .chika-antenna,
+.mascot-fix:has(:hover) .chika-antenna { animation: chika-wiggle .55s ease-in-out infinite alternate; }
+.mascot-fix:hover .chika-tail,
+.mascot-fix:has(:hover) .chika-tail { animation: chika-wag .5s ease-in-out infinite alternate; }
+.mascot-fix:hover .chika-rig,
+.mascot-fix:has(:hover) .chika-rig { animation: chika-bob .45s ease-in-out infinite alternate; }
+.mascot-fix:hover .chika-leg-left,
+.mascot-fix:has(:hover) .chika-leg-left { animation: chika-kick-left .45s ease-in-out infinite alternate; }
+.mascot-fix:hover .chika-leg-right,
+.mascot-fix:has(:hover) .chika-leg-right { animation: chika-kick-right .45s ease-in-out infinite alternate; }
+.mascot-fix:hover .avatar_shadow-433,
+.mascot-fix:has(:hover) .avatar_shadow-433 { animation: chika-shadow .45s ease-in-out infinite alternate; }
+@keyframes chika-flap-left { from { transform: rotate(6deg); } to { transform: rotate(-22deg); } }
+@keyframes chika-flap-right { from { transform: rotate(-8deg); } to { transform: rotate(20deg); } }
+@keyframes chika-wiggle { from { transform: rotate(-10deg); } to { transform: rotate(12deg); } }
+@keyframes chika-wag { from { transform: rotate(-8deg); } to { transform: rotate(10deg); } }
+@keyframes chika-bob { from { transform: translateY(0); } to { transform: translateY(-8px); } }
+@keyframes chika-kick-left { from { transform: rotate(4deg); } to { transform: rotate(-12deg); } }
+@keyframes chika-kick-right { from { transform: rotate(-6deg); } to { transform: rotate(10deg); } }
+@keyframes chika-shadow { from { transform: scale(1); } to { transform: scale(.86, .72); } }
+.mascot-ficha .ficha-tail,
+.mascot-ficha .ficha-arm-point,
+.mascot-ficha .ficha-brow,
+.mascot-tim .tim-tail { transform-box: view-box; }
+.mascot-ficha .ficha-tail { transform-origin: 151px 226px; }
+.mascot-ficha .ficha-arm-point { transform-origin: 158px 160px; }
+.mascot-ficha .ficha-brow-left { transform-origin: 181px 38px; }
+.mascot-ficha .ficha-brow-right { transform-origin: 218px 38px; }
+.mascot-tim .tim-tail,
+.mascot-tim .tim-arm-left,
+.mascot-tim .tim-arm-right,
+.mascot-tim .tim-brows { transform-box: view-box; }
+.mascot-tim .tim-tail { transform-origin: 155px 232px; }
+.mascot-tim .tim-arm-left,
+.mascot-tim .tim-arm-right,
+.mascot-tim .tim-brows { transition: transform .4s cubic-bezier(.22, 1, .36, 1); }
+.mascot-tim .tim-arm-left { transform-origin: 22px 142px; transform: rotate(11deg); }
+.mascot-tim .tim-arm-right { transform-origin: 174px 140px; transform: rotate(-11deg); }
+.mascot-ficha:hover .ficha-tail,
+.mascot-ficha:has(:hover) .ficha-tail { animation: ficha-wag 2.4s ease-in-out infinite alternate; }
+.mascot-ficha:hover .ficha-arm-point,
+.mascot-ficha:has(:hover) .ficha-arm-point { animation: ficha-scratch 3.4s ease-in-out infinite; }
+.mascot-ficha:hover .ficha-brow-left,
+.mascot-ficha:has(:hover) .ficha-brow-left { animation: ficha-frown-left 3.4s ease-in-out infinite; }
+.mascot-ficha:hover .ficha-brow-right,
+.mascot-ficha:has(:hover) .ficha-brow-right { animation: ficha-frown-right 3.4s ease-in-out infinite; }
+.mascot-tim:hover .tim-arm-left,
+.mascot-tim:has(:hover) .tim-arm-left { transform: rotate(-5deg); }
+.mascot-tim:hover .tim-arm-right,
+.mascot-tim:has(:hover) .tim-arm-right { transform: rotate(5deg); }
+.mascot-tim:hover .tim-brows,
+.mascot-tim:has(:hover) .tim-brows { transform: translateY(5px); }
+.mascot-tim:hover .tim-tail,
+.mascot-tim:has(:hover) .tim-tail { animation: tim-wag 1.8s ease-in-out infinite alternate; }
+@keyframes ficha-wag { from { transform: rotate(-3deg); } to { transform: rotate(4deg); } }
+@keyframes ficha-scratch {
+  0%, 14% { transform: rotate(0); }
+  20% { transform: rotate(-7deg); }
+  26% { transform: rotate(-2deg); }
+  32% { transform: rotate(-8deg); }
+  38% { transform: rotate(-1deg); }
+  44% { transform: rotate(-6deg); }
+  52%, 100% { transform: rotate(0); }
+}
+@keyframes ficha-frown-left {
+  0%, 14% { transform: rotate(0); }
+  22%, 44% { transform: rotate(18deg); }
+  54%, 100% { transform: rotate(0); }
+}
+@keyframes ficha-frown-right {
+  0%, 14% { transform: rotate(0); }
+  22%, 44% { transform: rotate(-18deg); }
+  54%, 100% { transform: rotate(0); }
+}
+@keyframes tim-wag { from { transform: rotate(-4deg); } to { transform: rotate(5deg); } }
+/* Footer wordmark: each letter starts tucked behind the blue plate, spread out
+   from the central О and out of focus; --e (0..1, set on scroll) brings it up,
+   in and sharp. Without JS, or with reduced motion, --e stays 1: the word at rest. */
+.footer-letter {
+  --k: calc(1 - var(--e, 1));
+  position: absolute; display: block; overflow: visible;
+  transform: translate3d(calc(var(--d) * 42px * var(--k)), calc(280px * var(--k)), 0);
+  filter: blur(calc(12px * var(--k)));
+}
+.footer-letter.is-moving { will-change: transform, filter; }
+/* The wordmark spans the viewport width plus 2.5%, centred on the viewport, so it
+   is cropped by the same small margin on every screen; the height follows the
+   artwork ratio. Up to 1440 the 1440px footer sits at the left edge; above it,
+   local px are zoomed (see the Union plate above). */
+#footer .logo_ingotech-765 { left: calc(var(--viewport-width, 100vw) / 2); width: calc(var(--viewport-width, 100vw) * 1.025); height: auto; aspect-ratio: 1509.76 / 252; }
+@media (min-width: 1441px) {
+  #footer .logo_ingotech-765 { left: 50%; width: calc(var(--viewport-width, 100vw) / var(--page-scale) * 1.025); }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation: none !important; transition: none !important; } }

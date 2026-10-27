@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+build_dir=".figma/make/deploy-build"
+rm -rf "$build_dir"
+mkdir -p "$build_dir"
+
+cp index.html "$build_dir/"
+cp -R css js public "$build_dir/"
+
+figma make deploy --build-dir "$build_dir"

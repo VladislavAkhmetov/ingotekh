@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+build_dir="$(mktemp -d)"
+trap 'rm -rf "$build_dir"' EXIT
+
+cp index.html "$build_dir/"
+cp -R css js public "$build_dir/"
+
+figma make deploy-preview --build-dir "$build_dir"
