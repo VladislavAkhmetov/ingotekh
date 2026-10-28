@@ -1,0 +1,559 @@
+/* Figma revision 6230:6877. Geometry stays in 1440px composition units. */
+
+/* Shared motion language for the landing: one easing, one reveal gesture
+   (rise + unblur), one stagger step. Reuse these for new scroll animations. */
+:root {
+  --motion-ease: cubic-bezier(.22, 1, .36, 1);
+  --motion-reveal: .8s;
+  --motion-move: .9s;
+  --motion-shift: 32px;
+  --motion-blur: 8px;
+  --motion-stagger: 220ms;
+  /* Quick variant for short phrases inside one block. */
+  --motion-quick: .55s;
+  --motion-stagger-quick: 140ms;
+}
+
+/* Hero tags: icon circle detached from the label pill. */
+.hero-tag { position: absolute; display: flex; align-items: center; gap: 3px; }
+.hero-tag--ecosystems { left: calc(8.33% + 82px); top: 143px; }
+.hero-tag--digital { left: calc(50% + 55px); top: 116px; }
+.hero-tag--ai { left: calc(58.33% + 1px); top: 377px; }
+.hero-tag__icon { position: relative; flex: none; width: 42px; height: 42px; }
+.hero-tag__icon-bg { position: absolute; inset: 0; width: 42px; height: 42px; }
+.hero-tag__icon-glyph { position: absolute; left: 9px; top: 9px; width: 24px; height: 24px; }
+.hero-tag__label { display: flex; align-items: center; height: 42px; padding: 0 25.217px; border-radius: 28.019px; font: 500 17.871px/1.1 'IngoStem', sans-serif; white-space: nowrap; color: var(--blue); }
+.hero-tag--ecosystems .hero-tag__label { background: #33c9ff; }
+.hero-tag--digital .hero-tag__label { background: #a090ff; color: var(--white); }
+.hero-tag--ai .hero-tag__label { background: #0cdac5; }
+.hero_cta-31 { top: 531px; }
+
+/* About: smaller slider arrows. */
+.layer-53 { left: calc(41.67% + 71.82px); top: 486.31px; width: 42.383px; height: 58.756px; }
+.layer-55 { left: calc(83.33% + 8.21px); top: 485.42px; width: 43.294px; height: 60.137px; }
+/* About: right-hand paragraphs rise in one by one on scroll; the angle brackets
+   travel down to frame the newest one. Hidden only once JS has taken over. */
+.motion-ready .about-step { opacity: 0; transform: translateY(var(--motion-shift)); filter: blur(var(--motion-blur)); transition: opacity var(--motion-reveal) var(--motion-ease), transform var(--motion-reveal) var(--motion-ease), filter var(--motion-reveal) var(--motion-ease); }
+.motion-ready .about-step.is-revealed { opacity: 1; transform: none; filter: blur(0); }
+.motion-ready .about-bracket { opacity: 0; transform: translateY(var(--bracket-y, 0px)); transition: transform var(--motion-move) var(--motion-ease), opacity var(--motion-reveal) var(--motion-ease); }
+.motion-ready #about.has-steps .about-bracket { opacity: 1; }
+/* About lead: three phrases assemble quickly before the right column starts.
+   Inline spans keep the natural wrapping; positioning them would break the
+   paragraph's text-box-trim, so they only unblur and fade in. */
+.motion-ready .about-phrase, .motion-ready .reveal-phrase { opacity: 0; filter: blur(var(--motion-blur)); transition: opacity var(--motion-quick) var(--motion-ease), filter var(--motion-quick) var(--motion-ease); }
+.motion-ready .about-phrase.is-revealed, .motion-ready .reveal-phrase.is-revealed { opacity: 1; filter: blur(0); }
+/* Generic sequential step (same gesture as the About paragraphs). Uses the
+   standalone `translate` so it composes with any existing `transform`. */
+.motion-ready .reveal-step { opacity: 0; translate: 0 var(--motion-shift); filter: blur(var(--motion-blur)); transition: opacity var(--motion-reveal) var(--motion-ease), translate var(--motion-reveal) var(--motion-ease), filter var(--motion-reveal) var(--motion-ease); }
+.motion-ready .reveal-step:not(.is-revealed) { pointer-events: none; }
+.motion-ready .reveal-step.is-revealed { opacity: 1; translate: 0 0; filter: blur(0); }
+/* Contents of a revealed step (e.g. tech stack title and tags) cascade quickly. */
+.motion-ready .reveal-chip { opacity: 0; translate: 0 8px; filter: blur(4px); transition: opacity var(--motion-quick) var(--motion-ease), translate var(--motion-quick) var(--motion-ease), filter var(--motion-quick) var(--motion-ease); }
+.motion-ready .is-revealed .reveal-chip { opacity: 1; translate: 0 0; filter: blur(0); transition-delay: calc(120ms + var(--i, 0) * 45ms); }
+
+/* Projects: aligned cards of equal height. */
+.section-04_projects-57 { height: 718px; }
+.project-card { position: absolute; top: 202px; width: 305px; height: 426px; color: var(--white); }
+.project-card--ingo { left: 80px; }
+.project-card--iman { left: calc(25% + 45px); }
+.project-card--smart { left: calc(50% + 10px); }
+.project-card--codegen { left: calc(75% - 25px); }
+.project-card__shape { position: absolute; inset: 0; width: 305px; height: 426px; max-width: none; }
+.project-card__art { position: absolute; max-width: none; }
+.project-card--ingo .project-card__art { left: 86px; top: 29px; width: 125.085px; height: 140px; }
+.project-card--iman .project-card__art { left: 61px; top: 17px; width: 191.019px; height: 163.63px; }
+.project-card--smart .project-card__art { left: 86px; top: 41px; width: 129px; height: 130px; }
+.project-card--codegen .project-card__art { left: 77px; top: 41px; width: 151.303px; height: 121px; }
+.project-card__text { position: absolute; left: 20px; top: 192px; display: flex; flex-direction: column; gap: 16px; }
+.project-card--ingo .project-card__text { width: 259px; }
+.project-card--iman .project-card__text { width: 257px; }
+.project-card--smart .project-card__text { width: 272px; }
+.project-card--codegen .project-card__text { width: 255px; }
+.project-card__title { font: 500 30px/1.2 'IngoStem', sans-serif; }
+.project-card--ingo .project-card__title { width: 245px; line-height: 1.1; }
+.project-card--smart .project-card__title { letter-spacing: -0.3px; }
+.project-card__desc { font: 400 15px/1.2 'IngoStem', sans-serif; }
+.project-card--smart .project-card__desc { width: 260px; }
+.project-card__more { position: absolute; left: 241px; top: 362px; width: 44px; height: 44px; }
+
+/* Team: plain stats, revised illustration placement, scroll-revealed copy. */
+.section-05_team-103 { height: 2085px; }
+.team_cta-118 { left: calc(62.5% + 20.5px); top: 1935px; width: 377px; }
+.team_illustration_1-137 { left: calc(58.33% - 2px); }
+.team_illustration_2-139 { left: 147px; top: 843px; }
+.team_illustration_3-141 { left: 100px; top: 1384px; }
+.team-stats { position: absolute; left: calc(50% + 12px); top: 1354px; width: 405px; display: flex; flex-direction: column; gap: 60px; color: var(--white); }
+.team-stat { display: flex; flex-direction: column; gap: 24px; width: 100%; }
+.team-stat:nth-child(2) { width: 380px; }
+.team-stat:nth-child(3) { width: 277px; }
+.team-stat__value { font: 700 86px/1 'IngoStem', sans-serif; text-box-edge: cap alphabetic; text-box-trim: trim-both; }
+.team-stat__label { font: 400 24px/1.1 'IngoStem', sans-serif; text-box-edge: cap alphabetic; text-box-trim: trim-both; }
+
+/* Employee quotes: hanging badges. */
+.section-06_partners-220 { height: 509px; isolation: isolate; } /* keeps badge stacking below the fixed header */
+.quote-card__strap { position: absolute; width: 61px; height: 127px; border-radius: 0 0 8px 8px; background: linear-gradient(to bottom, var(--dark), #3999ff); }
+/* Each badge hangs from the top of its strap: that point is the swing pivot. */
+.quote-card { position: absolute; left: var(--x); top: 109px; width: 305px; height: 301px; border-radius: 20px; background: #3999ff; color: var(--white); transform-origin: 152.5px -110px; transform: perspective(1100px) rotateY(-32deg); }
+/* Card-file overlap: all five fit between the 80px gutters; each badge's far
+   (left) edge tucks behind the nearer right edge of its left neighbour. */
+.quote-card:nth-of-type(1) { z-index: 5; }
+.quote-card:nth-of-type(2) { z-index: 4; }
+.quote-card:nth-of-type(3) { z-index: 3; }
+.quote-card:nth-of-type(4) { z-index: 2; }
+.quote-card:nth-of-type(5) { z-index: 1; }
+.motion-ready .quote-card { will-change: transform; transform-origin: 50% 50%; }
+/* Glint that slides across the badge as it twists and sways in 3D. */
+.quote-card::after { content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; background: linear-gradient(100deg, transparent 38%, rgba(255, 255, 255, .2) 50%, transparent 62%) var(--glint-x, 50%) 0 / 300% 100% no-repeat; opacity: var(--glint, 0); }
+.quote-card__bubble { position: absolute; left: 0; top: .17px; width: 305px; height: 223.019px; max-width: none; transform: scaleY(-1); }
+.quote-card__tail { position: absolute; left: 107px; top: 163px; width: 52px; height: 65.4267px; }
+.quote-card__text { position: absolute; left: 20px; top: 40px; font: 400 24px/1.1 'IngoStem', sans-serif; text-box-edge: cap alphabetic; text-box-trim: trim-both; }
+.quote-card__person { position: absolute; left: 20px; top: 248px; width: 144px; display: flex; flex-direction: column; gap: 4px; font-size: 15px; }
+.quote-card__name { font-weight: 500; line-height: 1.1; white-space: nowrap; }
+.quote-card__role { font-weight: 300; line-height: 1.2; white-space: nowrap; }
+.quote-card__more { position: absolute; left: 249px; top: 245px; width: 44px; height: 44px; padding: 0; border: 0; border-radius: 50%; background: none; cursor: pointer; transition: transform .5s var(--motion-ease); }
+.quote-card__more img { display: block; width: 44px; height: 44px; }
+.quote-card__more:hover { transform: scale(1.06); }
+.quote-card__more:focus-visible { outline: 2px solid var(--white); outline-offset: 3px; }
+.quote-card__strap { left: 50%; top: -110px; transform: translateX(-50%); }
+
+/* Mascots: one featured character with a thumbnail switcher. The stage carries
+   the active .mascot-tim/.mascot-ficha/.mascot-fix class, so hovering anywhere
+   on it plays the existing character animations from motion.css. */
+.section-08_mascots-416 { height: 759px; }
+.mascots-title { position: absolute; left: 80px; top: 100px; font: 500 60px/1.1 'IngoStem', sans-serif; white-space: nowrap; text-box-edge: cap alphabetic; text-box-trim: trim-both; }
+.mascots-intro { position: absolute; left: 80px; top: 202px; width: 493px; font: 300 24px/1.2 'IngoStem', sans-serif; }
+.mascots-intro p + p { margin-top: 16px; }
+.mascot-stage { position: absolute; left: calc(41.67% + 22px); top: 202px; width: 738px; height: 467px; color: var(--white); }
+.mascot-stage__shape { position: absolute; inset: 0; width: 738px; height: 467px; max-width: none; }
+.mascot-figure { position: absolute; }
+.mascot-figure[hidden] { display: none; }
+.mascot-figure.is-active { animation: mascot-in .45s cubic-bezier(.22, 1, .36, 1) both; }
+.mascot-figure > img { display: block; width: 100%; height: 100%; max-width: none; }
+.mascot-figure[data-mascot="tim"] { left: 27px; top: 51px; width: 314px; height: 378px; }
+/* The revised design faces Tim the other way. */
+.mascot-figure[data-mascot="tim"] > * { transform: scaleX(-1); }
+.mascot-figure[data-mascot="ficha"] { left: 19px; top: 51px; width: 330px; height: 378px; }
+.mascot-figure[data-mascot="fix"] { left: 64.5px; top: 129px; width: 239px; height: 300px; }
+.mascot-info { position: absolute; left: 372px; top: 101px; width: 319px; }
+.mascot-info__name { position: absolute; left: 0; top: 0; font: 500 40px/1.1 'IngoStem', sans-serif; white-space: nowrap; text-box-edge: cap alphabetic; text-box-trim: trim-both; }
+.mascot-info__desc { position: absolute; left: 0; top: 52px; width: 319px; font: 400 20px/1.2 'IngoStem', sans-serif; text-box-edge: cap alphabetic; text-box-trim: trim-both; }
+.mascot-info__more { position: absolute; left: 0; top: 122px; display: flex; align-items: center; gap: 10px; padding: 0; border: 0; background: none; color: inherit; cursor: pointer; font: 400 15px/1.2 'IngoStem', sans-serif; white-space: nowrap; text-box-edge: cap alphabetic; text-box-trim: trim-both; }
+.mascot-info__more:focus-visible { outline: 2px solid var(--white); outline-offset: 4px; border-radius: 2px; }
+.mascot-info__chevron { display: flex; align-items: center; justify-content: center; width: 10.692px; height: 10.692px; transition: transform .4s var(--motion-ease); }
+.mascot-info__more:hover .mascot-info__chevron { transform: translateX(3px); }
+.mascot-info__chevron > span { position: relative; width: 7.56px; height: 7.56px; transform: rotate(45deg); }
+.mascot-info__chevron img { position: absolute; inset: -16.53%; width: 10.0604px; height: 10.0604px; max-width: none; }
+.mascot-thumbs { position: absolute; left: 373px; top: 326px; display: flex; gap: 12px; }
+.mascot-thumb { position: relative; flex: none; width: 100px; height: 100px; padding: 0; border: 0; border-radius: 20px; background: #a4d0ff; overflow: clip; cursor: pointer; opacity: .5; outline: 3px solid transparent; outline-offset: 3px; transition: opacity .25s, outline-color .25s; }
+.mascot-thumb:hover { opacity: .8; }
+.mascot-thumb.is-active { opacity: 1; outline-color: #0cdac5; }
+.mascot-thumb:focus-visible:not(.is-active) { outline-color: var(--white); }
+.mascot-thumb > img { position: absolute; max-width: none; }
+.mascot-thumb__crop { position: absolute; left: 0; top: 4px; width: 97.25px; height: 126.803px; overflow: hidden; transform: scaleX(-1); }
+.mascot-thumb__crop img { position: absolute; left: 0; top: 0; width: 110.22%; height: 122.14%; max-width: none; }
+@keyframes mascot-in { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+
+/* Feedback ends 19px earlier so the footer wordmark rises. */
+.section-10_feedback-721 { height: 829px; }
+
+/* Feedback form: real controls keep the Figma field boxes; states add focus,
+   error hints, an inactive submit until the form is complete, and sending. */
+.feedback-control {
+  display: block; margin: 0; appearance: none; outline: none;
+  font: 400 15px/normal 'IngoStem', sans-serif; color: var(--dark);
+  transition: border-color .25s var(--motion-ease), box-shadow .25s var(--motion-ease), opacity .25s;
+}
+input.feedback-control { min-height: 40px; }
+.feedback-control--textarea { line-height: 1.4; resize: none; }
+.feedback-control::placeholder { color: #98a2b3; opacity: 1; }
+.feedback-control:hover { border-color: #c4ccd8; }
+.feedback-control:focus-visible { border-color: var(--blue); box-shadow: 0 0 0 3px rgb(0 98 210 / .14); }
+.feedback-field.is-invalid .feedback-control { border-color: #f04438; }
+.feedback-field.is-invalid .feedback-control:focus-visible { box-shadow: 0 0 0 3px rgb(240 68 56 / .14); }
+.feedback-control:disabled { opacity: .6; }
+/* Hints sit in the 20px gaps below their field (and one line under the
+   actions), so the fixed-height card never reflows or overflows. */
+.feedback-field__error, .feedback-form__status {
+  position: absolute; left: 0; top: calc(100% + 3px); margin: 0; white-space: nowrap;
+  font: 400 13px/1.2 'IngoStem', sans-serif; color: #d92d20;
+}
+.feedback-actions > .feedback-field__error, .feedback-form__status { top: calc(100% + 8px); }
+.feedback-form__status:empty { display: none; }
+.feedback-form__status[data-tone="success"] { color: var(--blue); }
+.feedback-actions { position: relative; }
+
+.feedback-submit { border: 0; font: inherit; }
+
+.feedback-consent { cursor: pointer; }
+.feedback-consent__input { position: absolute; left: 0; top: 50%; width: 16px; height: 16px; margin: -8px 0 0; opacity: 0; cursor: pointer; }
+.feedback-consent .checkbox-758 { background-color: var(--white); border-color: #d0d5dd; transition: background-color .2s, border-color .2s; }
+.feedback-consent .layer-760 { opacity: 0; transform: scale(.6); transition: opacity .2s, transform .2s var(--motion-ease); }
+.feedback-consent:hover .checkbox-758 { border-color: var(--blue); }
+.feedback-consent__input:checked + .checkbox-758 { background-color: var(--blue); border-color: var(--blue); }
+.feedback-consent__input:checked + .checkbox-758 .layer-760 { opacity: 1; transform: none; }
+.feedback-consent__input:focus-visible + .checkbox-758 { outline: 2px solid var(--blue); outline-offset: 2px; }
+.feedback-consent.is-invalid .checkbox-758 { border-color: #f04438; }
+.feedback-consent__input:disabled, .feedback-consent__input:disabled ~ * { cursor: default; opacity: .6; }
+
+/* Feedback sent (Figma 6342:10271): text and action on the left, the 3D check
+   cropped and tilted on the right. Shares the popup shell, backdrop and close. */
+.project-popup.project-popup--thanks {
+  width: min(770px, calc(100vw - 32px)); min-height: 0; height: 360px; overflow: hidden;
+  justify-content: space-between; gap: 0; padding: 68px 0 60px 70px;
+  border-color: rgb(220 227 250 / .5); box-shadow: 0 16px 40px rgba(0, 31, 77, .05);
+}
+.thanks-popup__text { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 12px; width: 424px; max-width: 100%; color: var(--dark); }
+.thanks-popup__title { margin: 0; font: 500 32px/1.2 'IngoStem:Medium', 'IngoStem', sans-serif; }
+.thanks-popup__lead { margin: 0; font: 400 18px/1.4 'IngoStem:Regular', 'IngoStem', sans-serif; }
+.thanks-popup__action {
+  position: relative; z-index: 1; padding: 12px 32px; border: 0; border-radius: 12px; background: var(--blue); color: var(--white);
+  font: 500 15px/normal 'IngoStem:Medium', 'IngoStem', sans-serif; white-space: nowrap; cursor: pointer;
+}
+.thanks-popup__art { position: absolute; left: 370.78px; top: 47.98px; display: flex; align-items: center; justify-content: center; width: 401.684px; height: 409.936px; pointer-events: none; }
+.thanks-popup__check { position: relative; flex: none; width: 333px; height: 344px; overflow: hidden; transform: rotate(-12.96deg); }
+.thanks-popup__check img { position: absolute; left: -25.29%; top: -18.44%; width: 295.95%; height: 286.03%; max-width: none; }
+/* On open the check glides down from slightly above and eases to rest, then
+   slowly levitates. Its lowest 57px sit below the popup edge, so the 8px rise
+   never reveals the bottom. Restarts on every open; reduced motion leaves it still. */
+.project-popup--thanks[open] .thanks-popup__art { animation: thanks-art-drop 1.8s .15s cubic-bezier(.16, 1, .3, 1) both; }
+.project-popup--thanks[open] .thanks-popup__check { animation: thanks-art-float 7s 2.2s ease-in-out infinite; }
+@keyframes thanks-art-drop { from { opacity: 0; transform: translateY(-24px); } to { opacity: 1; transform: none; } }
+@keyframes thanks-art-float { 0%, 100% { translate: 0 0; } 50% { translate: 0 -8px; } }
+@media (max-width: 640px) {
+  .project-popup.project-popup--thanks { height: fit-content; justify-content: flex-start; gap: 20px; padding: 40px 20px 28px; overflow: auto; }
+  .thanks-popup__title { font-size: 24px; }
+  .thanks-popup__lead { font-size: 16px; }
+  .thanks-popup__art { position: relative; left: auto; top: auto; order: -1; align-self: center; width: 180px; height: 184px; }
+  .thanks-popup__check { transform: rotate(-12.96deg) scale(.54); }
+}
+
+/* Benefits: hovering a card cross-fades it to an outlined text state (Figma 6230:7557). */
+.benefit-card { outline: none; }
+/* A dark overlay fades over the coloured fill, so gradient cards transition too. */
+.benefit-card::before { content: ''; position: absolute; inset: 0; border-radius: inherit; background: var(--dark); box-shadow: inset 0 0 0 1px var(--white); opacity: 0; transition: opacity .45s cubic-bezier(.22, 1, .36, 1); pointer-events: none; }
+.benefit-card > div { transition: opacity .35s ease, transform .5s cubic-bezier(.22, 1, .36, 1); }
+.benefit-card__desc { position: absolute; left: 23px; top: 92px; width: 373px; font: 300 15px/1.4 'IngoStem', sans-serif; color: var(--white); opacity: 0; transform: translateY(10px); transition: opacity .35s ease, transform .5s cubic-bezier(.22, 1, .36, 1); pointer-events: none; }
+.benefit-card:focus-visible::before,
+.benefit-card:focus-visible .benefit-card__desc { opacity: 1; transform: none; transition-delay: .08s; }
+.benefit-card:focus-visible > div { opacity: 0; transform: translateY(12px) scale(.96); }
+@media (hover: hover) and (pointer: fine) {
+  .benefit-card:hover::before { opacity: 1; }
+  .benefit-card:hover > div { opacity: 0; transform: translateY(12px) scale(.96); }
+  .benefit-card:hover .benefit-card__desc { opacity: 1; transform: none; transition-delay: .08s; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .motion-ready .about-step, .motion-ready .about-bracket, .motion-ready .about-phrase,
+  .motion-ready .reveal-phrase, .motion-ready .reveal-step, .motion-ready .reveal-chip { transition: none; }
+  .mascot-figure.is-active { animation: none; }
+  .benefit-card::before, .benefit-card > div, .benefit-card__desc { transition: none; }
+}
+
+/* Project details popups (Figma 6290:7940). The round arrow on a card opens a
+   native modal dialog in the top layer, above the fixed header. Its ::after
+   stretches over the whole 305x426 card, so the entire card is the button.
+   Hover: the card lifts 6px and the arrow's circle fills softly. */
+.project-card__more { padding: 0; border: 0; border-radius: 50%; background: none; cursor: pointer; transition: background-color .35s var(--motion-ease); }
+.project-card__more::after { content: ''; position: absolute; inset: -362px -20px -20px -241px; border-radius: 20px; }
+.project-card__more img { position: relative; display: block; width: 44px; height: 44px; }
+.project-card__more:focus-visible { outline: 2px solid var(--sky-light); outline-offset: 3px; }
+.project-card { transition: transform .5s var(--motion-ease); }
+.motion-ready .project-card.reveal-step {
+  transition: opacity var(--motion-reveal) var(--motion-ease), translate var(--motion-reveal) var(--motion-ease), filter var(--motion-reveal) var(--motion-ease),
+    transform .5s var(--motion-ease);
+}
+.project-card:has(.project-card__more:focus-visible) { transform: translateY(-6px); }
+.project-card:has(.project-card__more:focus-visible) .project-card__more { background-color: rgb(255 255 255 / .16); }
+@media (hover: hover) and (pointer: fine) {
+  .project-card:hover { transform: translateY(-6px); }
+  .project-card:hover .project-card__more { background-color: rgb(255 255 255 / .16); }
+}
+.project-card:active { transform: translateY(-3px); transition-duration: .15s; }
+@media (prefers-reduced-motion: reduce) {
+  .project-card, .motion-ready .project-card.reveal-step { transition: none; }
+}
+
+.project-popup {
+  --popup-ease: var(--motion-ease);
+  position: fixed; inset: 0; margin: auto; box-sizing: border-box;
+  width: min(940px, calc(100vw - 32px)); min-height: 450px; max-height: calc(100dvh - 32px); overflow: auto;
+  display: flex; flex-direction: column; align-items: flex-start; gap: 24px; padding: 48px;
+  border: 1px solid #dce3fa; border-radius: 20px; background: var(--sky-light); color: var(--dark);
+  box-shadow: 0 16px 40px rgba(0, 31, 77, .07);
+  opacity: 0; transform: translateY(18px) scale(.985);
+  transition: opacity .45s var(--popup-ease), transform .6s var(--popup-ease), overlay .6s allow-discrete, display .6s allow-discrete;
+}
+.project-popup:not([open]) { display: none; }
+.project-popup[open] { opacity: 1; transform: none; }
+.project-popup--codegen { min-height: 0; }
+.project-popup::backdrop { background: rgb(39 41 43 / 0); transition: background .45s var(--popup-ease), overlay .6s allow-discrete, display .6s allow-discrete; }
+.project-popup[open]::backdrop { background: rgb(39 41 43 / .7); }
+@starting-style {
+  .project-popup[open] { opacity: 0; transform: translateY(18px) scale(.985); }
+  .project-popup[open]::backdrop { background: rgb(39 41 43 / 0); }
+}
+@media (min-width: 1441px) { .project-popup { zoom: var(--page-scale); } }
+.project-popup__title { margin: 0; padding-right: 32px; font: 600 30px/normal 'IngoStem:Medium', 'IngoStem', sans-serif; }
+.project-popup__body { max-width: 100%; font: 400 20px/1.2 'IngoStem:Regular', 'IngoStem', 'Noto Sans:Regular', 'Noto Sans Symbols:Regular', 'Noto Sans Symbols2:Regular', 'Noto Sans Math:Regular', sans-serif; font-variation-settings: "CTGR" 0, "wdth" 100; overflow-wrap: break-word; }
+.project-popup__body p { margin: 0 0 20px; }
+.project-popup__body p:last-child { margin-bottom: 0; }
+.project-popup--ingo .project-popup__body { width: 672px; }
+.project-popup--iman .project-popup__body { width: 794px; }
+.project-popup--smart .project-popup__body { width: 100%; }
+.project-popup--codegen .project-popup__body { width: 788px; font-variation-settings: normal; }
+/* Employee stories (Figma "попап 2–5"): narrower 843px card, name + role head. */
+.project-popup--person { width: min(843px, calc(100vw - 32px)); min-height: 370px; padding: 32px 48px; gap: 20px; box-shadow: 0 12px 32px rgba(0, 31, 77, .05); }
+.project-popup__head { display: flex; flex-direction: column; gap: 4px; padding-right: 32px; }
+.project-popup--person .project-popup__title { padding-right: 0; font-size: 24px; font-weight: 500; }
+.project-popup__role { margin: 0; font: 500 15px/normal 'IngoStem:Medium', 'IngoStem', sans-serif; }
+.project-popup--person .project-popup__body { width: 100%; }
+.project-popup--person .project-popup__body p { margin: 0; }
+.project-popup--person .project-popup__close { top: 19px; right: 22px; }
+/* Mascot stories (Figma "maskot popups"): character on the left, text column
+   from x=291 (520px wide), content centred in a 843x421 card. */
+.project-popup--mascot { width: min(843px, calc(100vw - 32px)); min-height: 421px; justify-content: center; padding: 32px 31px 32px 290px; gap: 20px; box-shadow: 0 12px 32px rgba(0, 31, 77, .05); }
+.project-popup--mascot .project-popup__head { padding-right: 0; }
+.project-popup--mascot .project-popup__title { padding-right: 0; font-size: 30px; font-weight: 500; }
+.project-popup--mascot .project-popup__role { font-size: 20px; }
+.project-popup--mascot .project-popup__body { width: 100%; }
+.project-popup--mascot .project-popup__close { top: 19px; right: 22px; }
+.mascot-popup__art { position: absolute; pointer-events: none; }
+.mascot-popup__art svg, .mascot-popup__art img { display: block; width: 100%; height: 100%; max-width: none; overflow: visible; }
+.mascot-popup__art.mascot-tim { left: -2px; top: 51px; width: 261px; height: 314px; }
+.mascot-popup__art.mascot-tim > * { transform: scaleX(-1); }
+.mascot-popup__art.mascot-ficha { left: -26px; top: 55px; width: 284px; height: 325px; }
+.mascot-popup__art.mascot-fix { left: 33px; top: 85px; width: 221px; height: 277px; }
+/* Always-on loops: a short burst of motion, then the character rests before
+   the next one (the stage versions only move on hover). */
+.project-popup .mascot-tim .tim-tail { animation: popup-tim-tail 4.2s ease-in-out infinite; }
+.project-popup .mascot-tim .tim-arm-left { animation: popup-tim-arm-left 4.2s cubic-bezier(.22, 1, .36, 1) infinite; }
+.project-popup .mascot-tim .tim-arm-right { animation: popup-tim-arm-right 4.2s cubic-bezier(.22, 1, .36, 1) infinite; }
+.project-popup .mascot-tim .tim-brows { animation: popup-tim-brows 4.2s cubic-bezier(.22, 1, .36, 1) infinite; }
+.project-popup .mascot-ficha .ficha-tail { animation: popup-ficha-tail 3.4s ease-in-out infinite; }
+.project-popup .mascot-ficha .ficha-arm-point { animation: ficha-scratch 3.4s ease-in-out infinite; }
+.project-popup .mascot-ficha .ficha-brow-left { animation: ficha-frown-left 3.4s ease-in-out infinite; }
+.project-popup .mascot-ficha .ficha-brow-right { animation: ficha-frown-right 3.4s ease-in-out infinite; }
+.project-popup .mascot-fix .chika-wing-left { animation: popup-chika-flap-left 3s ease-in-out infinite; }
+.project-popup .mascot-fix .chika-wing-right { animation: popup-chika-flap-right 3s ease-in-out infinite; }
+.project-popup .mascot-fix .chika-antenna { animation: popup-chika-wiggle 3s ease-in-out infinite; }
+.project-popup .mascot-fix .chika-tail { animation: popup-chika-wag 3s ease-in-out infinite; }
+.project-popup .mascot-fix .chika-rig { animation: popup-chika-bob 3s ease-in-out infinite; }
+.project-popup .mascot-fix .chika-leg-left { animation: popup-chika-kick-left 3s ease-in-out infinite; }
+.project-popup .mascot-fix .chika-leg-right { animation: popup-chika-kick-right 3s ease-in-out infinite; }
+@keyframes popup-tim-tail { 0% { transform: rotate(0); } 10%, 34% { transform: rotate(-4deg); } 22%, 46% { transform: rotate(5deg); } 58%, 100% { transform: rotate(0); } }
+@keyframes popup-tim-arm-left { 0%, 56%, 100% { transform: rotate(11deg); } 12%, 42% { transform: rotate(-5deg); } }
+@keyframes popup-tim-arm-right { 0%, 56%, 100% { transform: rotate(-11deg); } 12%, 42% { transform: rotate(5deg); } }
+@keyframes popup-tim-brows { 0%, 56%, 100% { transform: none; } 12%, 42% { transform: translateY(5px); } }
+@keyframes popup-ficha-tail { 0%, 60%, 100% { transform: rotate(0); } 20% { transform: rotate(-3deg); } 42% { transform: rotate(4deg); } }
+@keyframes popup-chika-flap-left { 0%, 46%, 100% { transform: rotate(0); } 7%, 21%, 35% { transform: rotate(-22deg); } 14%, 28% { transform: rotate(6deg); } }
+@keyframes popup-chika-flap-right { 0%, 46%, 100% { transform: rotate(0); } 7%, 21%, 35% { transform: rotate(20deg); } 14%, 28% { transform: rotate(-8deg); } }
+@keyframes popup-chika-wiggle { 0%, 46%, 100% { transform: rotate(0); } 9%, 27% { transform: rotate(12deg); } 18%, 36% { transform: rotate(-10deg); } }
+@keyframes popup-chika-wag { 0%, 46%, 100% { transform: rotate(0); } 8%, 24% { transform: rotate(10deg); } 16%, 32% { transform: rotate(-8deg); } }
+@keyframes popup-chika-bob { 0%, 46%, 100% { transform: translateY(0); } 7.5%, 22.5%, 37.5% { transform: translateY(-8px); } 15%, 30% { transform: translateY(0); } }
+@keyframes popup-chika-kick-left { 0%, 46%, 100% { transform: rotate(0); } 7.5%, 22.5%, 37.5% { transform: rotate(-12deg); } 15%, 30% { transform: rotate(4deg); } }
+@keyframes popup-chika-kick-right { 0%, 46%, 100% { transform: rotate(0); } 7.5%, 22.5%, 37.5% { transform: rotate(10deg); } 15%, 30% { transform: rotate(-6deg); } }
+.project-popup__close {
+  position: absolute; top: 20px; right: 21px; display: flex; align-items: center; justify-content: center;
+  width: 36px; height: 36px; padding: 10px; border: 0; border-radius: 20px; background: rgb(255 255 255 / .4);
+  cursor: pointer; transition: background-color .35s var(--popup-ease);
+}
+.project-popup__close img { display: block; flex: none; width: 20px; height: 20px; max-width: none; } /* the 20px icon is wider than the 16px padded box, as in Figma; lift the global img max-width */
+.project-popup__close:hover { background: rgb(255 255 255 / .7); }
+.project-popup__close:focus-visible { outline: 2px solid var(--dark); outline-offset: 2px; }
+html:has(.project-popup[open]) { overflow: hidden; }
+@media (max-width: 640px) {
+  .project-popup { min-height: 0; padding: 40px 20px 28px; gap: 16px; }
+  .project-popup__title { font-size: 24px; }
+  .project-popup__body { font-size: 17px; }
+  .project-popup__close { top: 12px; right: 12px; }
+  .project-popup--person { min-height: 0; }
+  .project-popup--person .project-popup__title { font-size: 22px; }
+  .project-popup--person .project-popup__close { top: 12px; right: 12px; }
+  .project-popup--mascot { min-height: 0; justify-content: flex-start; padding: 24px 20px 28px; }
+  .project-popup--mascot .project-popup__title { font-size: 24px; }
+  .project-popup--mascot .project-popup__role { font-size: 17px; }
+  .project-popup--mascot .project-popup__close { top: 12px; right: 12px; }
+  .mascot-popup__art.mascot-tim, .mascot-popup__art.mascot-ficha, .mascot-popup__art.mascot-fix { position: relative; left: auto; top: auto; align-self: center; width: auto; height: 190px; aspect-ratio: var(--art-ratio); }
+  .mascot-popup__art.mascot-tim { --art-ratio: 261 / 314; }
+  .mascot-popup__art.mascot-ficha { --art-ratio: 284 / 325; }
+  .mascot-popup__art.mascot-fix { --art-ratio: 221 / 277; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .project-popup, .project-popup::backdrop, .project-card__more, .quote-card__more { transition: none; }
+}
+
+/* Office: looping photo slider. The current photo sits centred (847×449, as in
+   the layout) with neighbours peeking in at the edges, 867px apart. Slides glide
+   on the shared easing; each image drifts slightly against the motion for depth.
+   JS sets --offset (slide position), --par (clamped parallax) and --drag. */
+/* Cards are 709x376 (the Figma 847x449 scaled down so the section fits a 1080p screen). */
+.office-slider { position: absolute; left: 0; right: 0; top: 268px; height: 376px; touch-action: pan-y; outline: none; }
+.office-slide { position: absolute; top: 0; left: 50%; width: 709px; height: 376px; margin: 0; overflow: hidden; border-radius: 20px; background: #34373d; cursor: pointer; transform: translateX(calc(-50% + var(--offset, 0) * 729px + var(--drag, 0px))); transition: transform var(--motion-move) var(--motion-ease); }
+.office-slide.is-current { cursor: zoom-in; }
+.office-slider.is-dragging .office-slide { cursor: grabbing; }
+.office-slide img { position: absolute; top: 0; left: -56px; width: calc(100% + 112px); max-width: none; height: 100%; object-fit: cover; pointer-events: none; user-select: none; -webkit-user-drag: none; transform: translateX(calc(var(--par, 0) * -48px - var(--drag, 0px) * .055)); transition: transform var(--motion-move) var(--motion-ease); }
+.office-slider.is-dragging .office-slide, .office-slider.is-dragging .office-slide img,
+.office-slide.is-wrapping, .office-slide.is-wrapping img { transition: none; }
+.office-slider:focus-visible .office-slide.is-current { outline: 2px solid var(--white); outline-offset: 4px; }
+
+/* Office photo lightbox: the current card opens full-screen, zooming out of its slot. */
+.photo-lightbox {
+  position: fixed; inset: 0; box-sizing: border-box; width: 100vw; height: 100dvh; max-width: none; max-height: none;
+  margin: 0; padding: 0; border: 0; background: transparent; color: var(--white); overflow: hidden;
+  display: grid; place-items: center;
+  opacity: 0; transition: opacity .4s var(--motion-ease), overlay .5s allow-discrete, display .5s allow-discrete;
+}
+.photo-lightbox:not([open]) { display: none; }
+.photo-lightbox[open] { opacity: 1; }
+.photo-lightbox::backdrop { background: rgb(24 25 27 / 0); transition: background .4s var(--motion-ease), overlay .5s allow-discrete, display .5s allow-discrete; }
+.photo-lightbox[open]::backdrop { background: rgb(24 25 27 / .94); }
+@starting-style {
+  .photo-lightbox[open] { opacity: 0; }
+  .photo-lightbox[open]::backdrop { background: rgb(24 25 27 / 0); }
+}
+.photo-lightbox__figure { display: flex; flex-direction: column; align-items: center; gap: 20px; margin: 0; touch-action: pan-y; }
+.photo-lightbox__img {
+  display: block; width: auto; height: auto; max-width: min(1600px, calc(100vw - 224px)); max-height: calc(100dvh - 148px);
+  border-radius: 20px; background: #34373d; transform-origin: 0 0; user-select: none; -webkit-user-drag: none;
+}
+.photo-lightbox__caption { display: flex; align-items: baseline; gap: 16px; font: 500 18px/1.2 'IngoStem', sans-serif; color: rgb(255 255 255 / .64); transition: opacity .3s var(--motion-ease); }
+.photo-lightbox__count { color: var(--white); font-variant-numeric: tabular-nums; }
+.photo-lightbox.is-zooming .photo-lightbox__caption { opacity: 0; }
+.photo-lightbox__nav, .photo-lightbox__close {
+  position: absolute; display: grid; place-items: center; width: 56px; height: 56px; padding: 0;
+  border: 0; border-radius: 50%; background: none; color: var(--white); cursor: pointer;
+  transition: transform .35s var(--motion-ease), background-color .25s var(--motion-ease);
+}
+.photo-lightbox__nav { top: 50%; margin-top: -28px; }
+.photo-lightbox__nav img { display: block; width: 100%; height: 100%; }
+.photo-lightbox__nav--prev { left: 40px; }
+.photo-lightbox__nav--prev img { transform: scaleX(-1); }
+.photo-lightbox__nav--next { right: 40px; }
+.photo-lightbox__close { top: 28px; right: 40px; border: 1px solid rgb(255 255 255 / .9); box-sizing: border-box; }
+.photo-lightbox__close svg { width: 20px; height: 20px; }
+@media (hover: hover) and (pointer: fine) {
+  .photo-lightbox__nav:hover { transform: scale(1.08); }
+  .photo-lightbox__close:hover { background: rgb(255 255 255 / .12); }
+}
+.photo-lightbox__nav:active { transform: scale(.94); }
+.photo-lightbox__nav:focus-visible, .photo-lightbox__close:focus-visible { outline: 2px solid var(--white); outline-offset: 3px; }
+html:has(.photo-lightbox[open]) { overflow: hidden; }
+@media (max-width: 760px) {
+  .photo-lightbox__img { max-width: calc(100vw - 32px); max-height: calc(100dvh - 200px); border-radius: 12px; }
+  .photo-lightbox__caption { flex-direction: column; align-items: center; gap: 6px; padding: 0 72px; text-align: center; font-size: 15px; }
+  .photo-lightbox__nav { top: auto; bottom: 24px; margin-top: 0; width: 48px; height: 48px; }
+  .photo-lightbox__nav--prev { left: 16px; }
+  .photo-lightbox__nav--next { right: 16px; }
+  .photo-lightbox__close { top: 16px; right: 16px; width: 48px; height: 48px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .photo-lightbox, .photo-lightbox::backdrop { transition: none; }
+}
+.gallery_arrowbtn_prev-704, .gallery_arrowbtn_next-706 { display: block; padding: 0; border-radius: 50%; background: none; cursor: pointer; transition: transform .35s var(--motion-ease), opacity .35s var(--motion-ease); }
+.gallery_arrowbtn_prev-704:hover, .gallery_arrowbtn_next-706:hover { transform: scale(1.08); }
+.gallery_arrowbtn_prev-704:active, .gallery_arrowbtn_next-706:active { transform: scale(.94); }
+.gallery_arrowbtn_prev-704:focus-visible, .gallery_arrowbtn_next-706:focus-visible { outline: 2px solid var(--white); outline-offset: 3px; }
+
+/* Office address: opens the map popup (plain Yandex Maps link without JS). */
+.office-address { color: inherit; text-decoration: underline 1px rgb(255 255 255 / .35); text-underline-offset: 4px; transition: text-decoration-color .35s var(--motion-ease), color .35s var(--motion-ease); }
+.office-address:hover { color: var(--sky-light); text-decoration-color: currentColor; }
+.office-address:focus-visible { outline: 2px solid var(--white); outline-offset: 4px; border-radius: 4px; }
+
+/* Office map popup, after the ingos.ru offices page: dark details panel on the
+   left, Yandex map on the right. The map widget (no API key) loads on first
+   open and fades in over a skeleton. */
+.project-popup.project-popup--map {
+  grid-template-columns: 420px 1fr; grid-template-rows: minmax(0, 1fr); align-items: stretch; gap: 0; padding: 0; overflow: hidden;
+  width: min(1120px, calc(100vw - 32px)); height: min(620px, calc(100dvh - 32px)); min-height: 0;
+  border: 1px solid rgb(255 255 255 / .08); background: var(--dark-surface); color: var(--white);
+  box-shadow: 0 24px 60px rgb(0 0 0 / .35);
+}
+/* Grid only while open: a bare display here would outrank
+   .project-popup:not([open]) and leave the closed dialog covering the page. */
+.project-popup.project-popup--map[open] { display: grid; }
+.map-popup__panel { position: relative; display: flex; flex-direction: column; min-height: 0; padding: 36px 32px 32px; overflow: auto; }
+.map-popup__title { margin: 0; padding-right: 44px; font: 500 28px/1.1 'IngoStem', sans-serif; }
+.map-popup__group { margin-top: 28px; padding-top: 24px; border-top: 1px solid rgb(255 255 255 / .1); }
+.map-popup__label { margin: 0; font: 500 15px/1.2 'IngoStem', sans-serif; color: var(--text-dim); }
+.map-popup__value { margin: 8px 0 0; font: 400 18px/1.3 'IngoStem', sans-serif; }
+.map-popup__metro { display: grid; gap: 8px; margin: 16px 0 0; padding: 0; list-style: none; font: 400 15px/1.2 'IngoStem', sans-serif; color: var(--text-muted); }
+.map-popup__metro li { display: flex; align-items: center; gap: 10px; }
+.map-popup__metro li::before { content: ''; flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--line); }
+.map-popup__actions { display: grid; gap: 12px; margin-top: auto; padding-top: 32px; }
+.map-popup__route { position: relative; display: flex; align-items: center; justify-content: center; height: 52px; border-radius: 16px; font: 500 18px/1 'IngoStem', sans-serif; }
+.map-popup__link:active { transform: scale(.98); }
+.map-popup__links { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.map-popup__link { display: flex; align-items: center; justify-content: center; height: 44px; padding: 0 12px; border: 1px solid rgb(255 255 255 / .18); border-radius: 14px; background: none; color: var(--white); font: 500 15px/1 'IngoStem', sans-serif; text-decoration: none; white-space: nowrap; cursor: pointer; transition: border-color .35s var(--motion-ease), background-color .35s var(--motion-ease), transform .35s var(--motion-ease); }
+.map-popup__link:hover { border-color: rgb(255 255 255 / .5); background: rgb(255 255 255 / .06); }
+.map-popup__copy.is-copied { border-color: var(--teal); color: var(--teal); }
+.map-popup__link:focus-visible { outline: 2px solid var(--white); outline-offset: 2px; }
+.map-popup__map { position: relative; min-height: 0; background: linear-gradient(100deg, #2f3235 30%, #3a3d41 50%, #2f3235 70%) 0 0 / 300% 100%; animation: map-skeleton 1.6s linear infinite; }
+.map-popup__map.is-loaded { animation: none; }
+.map-popup__map iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; opacity: 0; transition: opacity .6s var(--motion-ease); }
+.map-popup__map.is-loaded iframe { opacity: 1; }
+@keyframes map-skeleton { to { background-position: -150% 0; } }
+.project-popup--map .project-popup__close:focus-visible { outline-color: var(--white); }
+/* The shared popup close button, placed in the panel corner (clear of the
+   widget's own map controls) and kept above the animating panel rows. */
+.project-popup--map .map-popup__panel > .project-popup__close { z-index: 1; top: 33px; right: 32px; }
+/* Panel contents settle in quickly after the popup opens. */
+.project-popup--map[open] .map-popup__panel > * { animation: map-panel-in .6s var(--motion-ease) both; }
+.project-popup--map[open] .map-popup__panel > :nth-child(3) { animation-delay: .08s; }
+.project-popup--map[open] .map-popup__panel > :nth-child(4) { animation-delay: .16s; }
+@keyframes map-panel-in { from { opacity: 0; transform: translateY(12px); } }
+@media (max-width: 860px) {
+  .project-popup.project-popup--map { grid-template-columns: 1fr; grid-template-rows: minmax(240px, 42%) 1fr; height: calc(100dvh - 32px); padding: 0; }
+  .map-popup__map { order: -1; }
+  .map-popup__panel { padding: 24px 20px 20px; }
+  .map-popup__title { font-size: 24px; }
+  .project-popup--map .map-popup__panel > .project-popup__close { top: 19px; right: 20px; }
+  .map-popup__group { margin-top: 20px; padding-top: 18px; }
+}
+.map-popup__title:focus { outline: none; }
+
+/* Scroll-driven glass plates sequence (js/techstack-sequence.js) */
+.techstack-sequence { position: absolute; left: 0; top: 0; width: 712px; height: 712px; pointer-events: none; will-change: transform; transform-origin: 50% 50%; }
+.has-techstack-sequence .team_illustration_1-137,
+.has-techstack-sequence .team_illustration_2-139,
+.has-techstack-sequence .team_illustration_3-141 { visibility: hidden; }
+
+/* CTA buttons: one state system for every call to action.
+   .cta--light  white on dark or blue surfaces (hero, team, office, map route)
+   .cta--blue   blue on light surfaces (feedback submit, thanks popup)
+   Flat by design: hover (mouse only) and keyboard focus tint the surface, press
+   tints it further and compresses slightly, focus adds an outline. The feedback
+   form adds disabled and sending states. Pressing uses the standalone `scale`
+   property, so it never fights the element transforms or the reveal `translate`. */
+.cta {
+  --cta-ease: var(--motion-ease);
+  cursor: pointer; text-decoration: none; -webkit-tap-highlight-color: transparent;
+  transition: background-color .35s var(--cta-ease), scale .2s var(--cta-ease);
+}
+/* Team CTA also reveals in sequence: keep both sets of transitions. */
+.motion-ready .cta.reveal-step {
+  transition: opacity var(--motion-reveal) var(--motion-ease), translate var(--motion-reveal) var(--motion-ease), filter var(--motion-reveal) var(--motion-ease),
+    background-color .35s var(--cta-ease), scale .2s var(--cta-ease);
+}
+.cta:active { scale: .97; transition-duration: .35s, .08s; }
+.motion-ready .cta.reveal-step:active { transition-duration: var(--motion-reveal), var(--motion-reveal), var(--motion-reveal), .35s, .08s; }
+.cta:focus-visible { outline: 2px solid var(--sky-light); outline-offset: 4px; }
+
+.cta--light { background-color: var(--white); color: var(--blue); }
+.cta--light:focus-visible { background-color: #e3f5ff; }
+.cta--light:active { background-color: #cdeeff; }
+
+.cta--blue { background-color: var(--blue); color: var(--white); }
+.cta--blue:focus-visible { outline-color: var(--blue); outline-offset: 3px; background-color: var(--blue-hover); }
+.cta--blue:not([aria-disabled="true"]):active { background-color: #00439a; }
+
+@media (hover: hover) and (pointer: fine) {
+  .cta--light:hover { background-color: #e3f5ff; }
+  .cta--light:hover:active { background-color: #cdeeff; }
+  .cta--blue:not([aria-disabled="true"]):hover { background-color: var(--blue-hover); }
+  .cta--blue:not([aria-disabled="true"]):hover:active { background-color: #00439a; }
+}
+
+/* Feedback form: disabled until valid (grey, no press); while sending, blue
+   and dimmed with a progress cursor, and no hover feedback. */
+.feedback-submit.cta[aria-disabled="true"] { background-color: #c4ccd8; scale: 1; cursor: not-allowed; }
+.feedback-form.is-sending .feedback-submit.cta { background-color: var(--blue); scale: 1; opacity: .75; cursor: progress; }

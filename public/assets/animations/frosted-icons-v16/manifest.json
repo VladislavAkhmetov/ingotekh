@@ -1,0 +1,38 @@
+{
+  "version": 16,
+  "source": "Approved v16 animation, with the Figma-matched sRGB grade",
+  "format": "WebP",
+  "hasAlpha": true,
+  "colorSpace": "sRGB",
+  "frameCount": 242,
+  "firstFrame": 1,
+  "lastFrame": 242,
+  "fps": 24,
+  "durationSeconds": 10.083333333333334,
+  "backgroundCss": "#27292B",
+  "backgroundBakedIntoFrames": false,
+  "frameIndexForProgress": "1 + Math.round(Math.max(0, Math.min(1, progress)) * 241)",
+  "variants": [
+    {
+      "id": "1024",
+      "width": 1024,
+      "height": 1024,
+      "urlPattern": "webp_1024/frame_{frame:04d}.webp",
+      "firstFrameUrl": "webp_1024/frame_0001.webp",
+      "totalBytes": 10127710
+    },
+    {
+      "id": "720",
+      "width": 720,
+      "height": 720,
+      "urlPattern": "webp_720/frame_{frame:04d}.webp",
+      "firstFrameUrl": "webp_720/frame_0001.webp",
+      "totalBytes": 8364084
+    }
+  ],
+  "verification": {
+    "allFramesDecode": true,
+    "alphaLossless": true,
+    "sRGBProfilePreserved": true
+  }
+}

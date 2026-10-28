@@ -1,0 +1,34 @@
+{
+  "passed": true,
+  "method": "Adjacent slow-motion frames; high-pass residual in flat opaque colored areas",
+  "limits": {
+    "median": 1,
+    "p95": 3,
+    "fraction_over_5": 0.005
+  },
+  "pairs": [
+    {
+      "frames": [
+        179,
+        180
+      ],
+      "pixels": 324791,
+      "median_highpass_difference_8bit": 0.0,
+      "p95_highpass_difference_8bit": 1.0,
+      "fraction_over_5_levels": 1.0263010161406362e-06
+    },
+    {
+      "frames": [
+        180,
+        181
+      ],
+      "pixels": 323919,
+      "median_highpass_difference_8bit": 0.0,
+      "p95_highpass_difference_8bit": 1.0,
+      "fraction_over_5_levels": 7.203446952273047e-06
+    }
+  ],
+  "note": "Spatial OIDN plus high fixed sample count, not a temporal-denoiser claim.",
+  "samples": 512,
+  "probe_render_seconds": []
+}

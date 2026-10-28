@@ -10,25 +10,26 @@
     inner.append(...section.childNodes);
     section.append(inner);
   });
+  document.querySelectorAll('img.chika-source, img.mascot-source').forEach(img => {
+    fetch(img.src).then(response => response.text()).then(markup => {
+      const svg = document.importNode(new DOMParser().parseFromString(markup, 'image/svg+xml').documentElement, true);
+      img.classList.forEach(name => {
+        if (name !== 'chika-source' && name !== 'mascot-source') svg.classList.add(name);
+      });
+      img.replaceWith(svg);
+    });
+  });
   const targets = ['projects', 'team', 'benefits', 'feedback'];
   header.querySelectorAll('.layer-7 > p').forEach((item, i) => {
     const link = document.createElement('a');
     link.href = '#' + targets[i]; link.className = item.className;
     link.textContent = item.textContent; item.replaceWith(link);
   });
-  const cta = hero.querySelector('.hero_cta-31');
-  const ctaLink = document.createElement('a');
-  ctaLink.className = cta.className; ctaLink.href = '#feedback';
-  ctaLink.append(...cta.childNodes); cta.replaceWith(ctaLink);
   const source = hero.querySelector('.hero_logo-15');
-  const destination = header.querySelector('.logo_ingotech-4');
-  const flying = document.createElement('div');
-  flying.className = 'flying-logo';
-  flying.setAttribute('aria-hidden', 'true');
-  flying.append(source.querySelector('img').cloneNode());
-  document.body.append(flying);
   const office = document.getElementById('office');
   const joinArt = [...office.querySelectorAll('.layer-708, .layer-710, .layer-713, .layer-715')];
+  const join = office.querySelector('.office-join');
+  const joinFlow = matchMedia('(max-width: 1023px)');
   // Each object has its own launch, curved path and continuing outward drift.
   const joinPaths = [
     { delay: 0, end: .86, bendX: -65, bendY: -40, angle: -18, driftX: -75, driftY: -100, spin: -9, growth: .06 },
@@ -37,24 +38,53 @@
     { delay: .30, end: .96, bendX: 80, bendY: 45, angle: -15, driftX: 95, driftY: 65, spin: -11, growth: .08 }
   ];
   const clamp = value => Math.max(0, Math.min(1, value));
-  let origin, target, joinStart, joinGeometry, progress = 0, joinProgress = 0;
+  let joinStart, joinGeometry, progress = 0, joinProgress = 0;
   let initialized = false;
   const layers = [...hero.querySelectorAll('.layer-13, .layer-33, [data-name^="Hero_Tag"]')];
   layers.forEach(el => el.classList.add('motion-layer'));
+  // Each tag floats on its own rhythm, depth and direction.
+  const tagMotion = new Map([
+    ['hero-tag--ecosystems', { speed: .55, phase: 0, ampX: 4, ampY: 7, depth: 10, tilt: .5 }],
+    ['hero-tag--digital', { speed: .82, phase: 2.1, ampX: 6, ampY: 3, depth: -7, tilt: -.4 }],
+    ['hero-tag--ai', { speed: .41, phase: 4.3, ampX: 3, ampY: 6, depth: 15, tilt: .3 }]
+  ]);
+  const motionFor = el => [...el.classList].map(c => tagMotion.get(c)).find(Boolean) || { speed: .65, phase: 0, ampX: 3, ampY: 4, depth: 8, tilt: .4 };
   let height, raf = 0, pointerX = 0, pointerY = 0, x = 0, y = 0, lastTime = 0;
   let docked = scrollY > 3;
   function measure() {
+    const viewport = document.documentElement.clientWidth;
+    const pageScale = viewport > 1440 ? (viewport - 160) / 1280 : 1;
+    document.documentElement.style.setProperty('--page-scale', pageScale);
+    document.documentElement.style.setProperty('--viewport-width', viewport + 'px');
+    document.documentElement.style.setProperty('--fit-scale', Math.min(1, viewport / 1440));
+    // Tech-stack cards are 176px wide; shrink them to fit 2 (phone) or 4 (tablet) columns.
+    const gutter = Math.min(48, Math.max(20, viewport * .055)), cols = viewport >= 640 ? 4 : 2;
+    // Mascot thumbnails (3 x 100px + gaps) inside the stage padding.
+    document.documentElement.style.setProperty('--mt-zoom', Math.min(1, (viewport - gutter * 2 - 32) / 316).toFixed(4));
+    // Benefit cards are 413px wide: one column on phones, two on tablets.
+    const bnCols = viewport >= 640 ? 2 : 1;
+    document.documentElement.style.setProperty('--bn-cols', bnCols);
+    document.documentElement.style.setProperty('--bn-zoom', Math.min(1, (viewport - gutter * 2 - (bnCols - 1) * 12) / bnCols / 413).toFixed(4));
+    document.documentElement.style.setProperty('--ts-zoom', Math.min(1, (viewport - gutter * 2 - (cols - 1) * 8) / cols / 176).toFixed(4));
     height = hero.offsetHeight;
-    const scale = Math.min(1, innerWidth / 1440, Math.max(.2, (height - 90) / 705));
+    const widthScale = viewport > 1440 ? pageScale : viewport / 1440;
+    const scale = Math.min(widthScale, Math.max(.2, (height - 90) / 705));
     hero.style.setProperty('--hero-scale', scale);
-    const box = source.getBoundingClientRect();
-    origin = { left: box.left, top: box.top + scrollY, width: box.width };
-    target = destination.getBoundingClientRect();
-    joinStart = office.getBoundingClientRect().top + scrollY + 800;
-    joinGeometry = joinArt.map(el => ({
-      x: 720 - el.offsetLeft - el.offsetWidth / 2,
-      y: 1140 - el.offsetTop - el.offsetHeight / 2
-    }));
+    // Keep the composition's 80px gutter at the same 80px * page-scale as the sections below.
+    hero.style.setProperty('--hero-left', 80 * pageScale - 80 * scale + 'px');
+    if (joinFlow.matches && join) {
+      // Below 1024px the art flies out of the centre of the in-flow join zone.
+      const box = join.getBoundingClientRect();
+      joinStart = box.top + scrollY + box.height * .1;
+      const cx = join.offsetWidth / 2, cy = join.offsetHeight / 2;
+      joinGeometry = joinArt.map(el => ({ x: cx - el.offsetLeft - el.offsetWidth / 2, y: cy - el.offsetTop - el.offsetHeight / 2 }));
+    } else {
+      joinStart = office.getBoundingClientRect().top + scrollY + 727 * pageScale;
+      joinGeometry = joinArt.map(el => ({
+        x: 720 - el.offsetLeft - el.offsetWidth / 2,
+        y: 1067 - el.offsetTop - el.offsetHeight / 2
+      }));
+    }
     wake();
   }
   function render(time) {
@@ -67,7 +97,7 @@
     const dt = Math.min(64, lastTime ? time - lastTime : 16.7);
     lastTime = time;
     const response = 1 - Math.exp(-dt / 110);
-    // Scroll directs the whole journey; vertical lift leads the reduction in size.
+    // The hero logo dissolves with scroll; the header appears as one unit once it's mostly gone.
     const desired = clamp((scroll - 3) / Math.min(360, height * .42));
     const joinDesired = Math.max(0, Math.min(2.8, (scroll + innerHeight * .92 - joinStart) / (innerHeight * .7)));
     if (!initialized || reduced.matches) {
@@ -79,20 +109,10 @@
     if (Math.abs(desired - progress) < .0005) progress = desired;
     if (Math.abs(joinDesired - joinProgress) < .0005) joinProgress = joinDesired;
     const p = reduced.matches ? (docked ? 1 : 0) : progress;
-    const inFlight = p > 0 && p < 1;
-    header.classList.toggle('is-revealed', p > .78 || reduced.matches);
-    hero.classList.toggle('is-docked', p > 0);
-    hero.classList.toggle('logo-in-flight', inFlight);
-    header.classList.toggle('logo-in-flight', p < 1);
-    flying.style.visibility = inFlight ? 'visible' : 'hidden';
-    if (inFlight) {
-      const lift = 1 - Math.pow(1 - p, 3);
-      const shrink = p * p * (3 - 2 * p);
-      const left = origin.left + (target.left - origin.left) * lift;
-      const top = (origin.top - scroll) * (1 - lift) + target.top * lift;
-      const width = origin.width + (target.width - origin.width) * shrink;
-      flying.style.transform = `translate3d(${left}px,${top}px,0) scale(${width / 1107})`;
-    }
+    header.classList.toggle('is-revealed', p > .6);
+    const fade = clamp(p / .7);
+    source.style.opacity = String(1 - fade);
+    source.style.filter = fade > 0 ? `blur(${fade * 18}px)` : '';
     // Original positions are a waypoint, not a stop: drift continues on exit.
     joinArt.forEach((el, i) => {
       const path = joinPaths[i];
@@ -103,8 +123,9 @@
       const arc = reduced.matches ? 0 : Math.sin(Math.PI * reveal);
       const exit = reduced.matches ? 0 : Math.max(0, joinProgress - path.end);
       const drift = exit * exit / (exit + .24);
-      const tx = dx * remaining + path.bendX * arc + path.driftX * drift;
-      const ty = dy * remaining + path.bendY * arc + path.driftY * drift;
+      const k = joinFlow.matches ? .45 : 1; // shorter bends and drift on small screens
+      const tx = dx * remaining + k * (path.bendX * arc + path.driftX * drift);
+      const ty = dy * remaining + k * (path.bendY * arc + path.driftY * drift);
       const angle = path.angle * remaining + path.spin * drift;
       el.style.transform = `translate3d(${tx}px,${ty}px,0) rotate(${angle}deg) scale(${.24 + .76 * reveal + path.growth * drift})`;
       el.style.opacity = String(.12 + .88 * reveal);
@@ -112,12 +133,19 @@
     if (progress !== desired || joinProgress !== joinDesired) wake();
     x += (pointerX - x) * response; y += (pointerY - y) * response;
     if (!reduced.matches && scroll < height && !document.hidden) {
-      layers.forEach((el, i) => {
+      layers.forEach(el => {
         const illustration = el.matches('.layer-13, .layer-33');
-        const depth = illustration ? 0 : 8;
-        const wave = time / 1000 * .65 + (illustration ? 0 : i * 1.7);
-        const direction = el.matches('.layer-33') ? -1 : 1;
-        el.style.transform = `translate3d(${x * depth + Math.sin(wave) * (illustration ? 9 : 3) * direction}px,${y * depth + Math.cos(wave) * (illustration ? 12 : 4) * direction}px,0) rotate(${illustration ? Math.sin(wave) * .7 * direction : x * .4}deg)`;
+        if (illustration) {
+          const wave = time / 1000 * .65;
+          const direction = el.matches('.layer-33') ? -1 : 1;
+          el.style.transform = `translate3d(${Math.sin(wave) * 9 * direction}px,${Math.cos(wave) * 12 * direction}px,0) rotate(${Math.sin(wave) * .7 * direction}deg)`;
+          return;
+        }
+        const m = motionFor(el);
+        const t = time / 1000;
+        const wx = Math.sin(t * m.speed + m.phase) * m.ampX;
+        const wy = Math.cos(t * m.speed * 1.37 + m.phase) * m.ampY;
+        el.style.transform = `translate3d(${x * m.depth + wx}px,${y * m.depth + wy}px,0) rotate(${x * m.tilt + Math.sin(t * m.speed * .8 + m.phase) * .6}deg)`;
       });
       wake();
     } else { layers.forEach(el => el.style.removeProperty('transform')); }
@@ -131,6 +159,7 @@
   hero.addEventListener('pointerleave', () => { pointerX = pointerY = 0; });
   addEventListener('scroll', wake, { passive: true });
   addEventListener('resize', measure, { passive: true });
+  joinFlow.addEventListener('change', measure);
   document.addEventListener('visibilitychange', wake);
   reduced.addEventListener('change', wake);
   measure();

@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Стеклянные пластины — v17</title>
+  <style>
+    *{box-sizing:border-box}html,body{margin:0;background:#27292b;color:#f5f7fa;font-family:Arial,Helvetica,sans-serif}
+    .sequence{--travel:1200px;height:calc(100svh + var(--travel));position:relative}
+    .stage{height:100svh;position:sticky;top:0;overflow:hidden;display:grid;place-items:center}
+    .copy{position:absolute;left:7vw;top:14vh;z-index:0;max-width:38vw;pointer-events:none}
+    .eyebrow{letter-spacing:.15em;text-transform:uppercase;font-size:12px;color:#a3b1c9}
+    h1{font-weight:500;font-size:clamp(40px,6vw,112px);letter-spacing:-.06em;line-height:1.02;margin:24px 0}
+    .note{font-size:16px;line-height:1.5;color:#aeb8c8;max-width:290px}
+    .object{width:min(65vw,940px,88svh);aspect-ratio:1;position:relative;z-index:1;will-change:transform}
+    canvas{width:100%;height:100%;display:block}
+    .progress{position:absolute;bottom:32px;left:7vw;font:12px ui-monospace,monospace;color:#aeb8c8}
+    .end{min-height:45svh;padding:12vh 7vw;font-size:clamp(24px,4vw,60px);letter-spacing:-.04em;background:#202225}
+    @media(max-width:900px){.copy{top:8vh;max-width:85vw}.note{font-size:14px}.object{width:min(94vw,64svh);margin-top:16vh}}
+    @media(prefers-reduced-motion:reduce){.sequence{height:100svh}.object{transform:none!important}}
+  </style>
+</head>
+<body>
+  <section class="sequence" data-frosted-sequence>
+    <div class="stage">
+      <div class="copy"><div class="eyebrow">Инготех · v17</div><h1>Технологии.<br>С заботой.</h1><p class="note">Прокрутите вниз — от защиты к заботе.</p></div>
+      <div class="object" data-sequence-object><canvas aria-label="Стеклянные пластины и щит, превращающийся в сердце" role="img"></canvas></div>
+      <div class="progress" data-sequence-status>Загрузка…</div>
+    </div>
+  </section>
+  <section class="end">Продолжение страницы</section>
+  <script src="scroll-sequence.js" defer></script>
+</body>
+</html>

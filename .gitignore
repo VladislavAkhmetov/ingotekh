@@ -5,3 +5,5 @@ desktop.ini
 *.log
 .env
 .env.*
+*.zip
+.figma/make/deploy-build/

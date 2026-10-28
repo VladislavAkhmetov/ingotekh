@@ -1,0 +1,463 @@
+{
+  "state": "ready",
+  "blend": "C:\\devlad\\3д\\frosted_icons\\frosted_glass_icons_animation_v17.blend",
+  "morph_meshes": 75,
+  "geometry": [
+    {
+      "frame": 202,
+      "morph": 0.0020108152892882687,
+      "vertices": 6718,
+      "faces": 6938
+    },
+    {
+      "frame": 203,
+      "morph": 0.004918938550522941,
+      "vertices": 6718,
+      "faces": 6970
+    },
+    {
+      "frame": 204,
+      "morph": 0.009027571292168425,
+      "vertices": 6718,
+      "faces": 6972
+    },
+    {
+      "frame": 205,
+      "morph": 0.014308862011998467,
+      "vertices": 6718,
+      "faces": 6972
+    },
+    {
+      "frame": 206,
+      "morph": 0.020772766853562826,
+      "vertices": 6718,
+      "faces": 6974
+    },
+    {
+      "frame": 207,
+      "morph": 0.028281055522111947,
+      "vertices": 6718,
+      "faces": 6974
+    },
+    {
+      "frame": 208,
+      "morph": 0.03676415409187342,
+      "vertices": 6718,
+      "faces": 6974
+    },
+    {
+      "frame": 209,
+      "morph": 0.0461601713385205,
+      "vertices": 6718,
+      "faces": 6974
+    },
+    {
+      "frame": 210,
+      "morph": 0.0564173971036029,
+      "vertices": 6718,
+      "faces": 6974
+    },
+    {
+      "frame": 211,
+      "morph": 0.06749357851209484,
+      "vertices": 6718,
+      "faces": 6974
+    },
+    {
+      "frame": 212,
+      "morph": 0.07935214758752678,
+      "vertices": 6711,
+      "faces": 6965
+    },
+    {
+      "frame": 213,
+      "morph": 0.09196232149511482,
+      "vertices": 6711,
+      "faces": 6965
+    },
+    {
+      "frame": 214,
+      "morph": 0.10529840587830086,
+      "vertices": 6711,
+      "faces": 6965
+    },
+    {
+      "frame": 215,
+      "morph": 0.11933968023527862,
+      "vertices": 6711,
+      "faces": 6965
+    },
+    {
+      "frame": 216,
+      "morph": 0.13406984899351174,
+      "vertices": 6711,
+      "faces": 6965
+    },
+    {
+      "frame": 217,
+      "morph": 0.14947632469486472,
+      "vertices": 6711,
+      "faces": 6965
+    },
+    {
+      "frame": 218,
+      "morph": 0.16549762708532187,
+      "vertices": 6711,
+      "faces": 6963
+    },
+    {
+      "frame": 219,
+      "morph": 0.18209019667975687,
+      "vertices": 6711,
+      "faces": 6965
+    },
+    {
+      "frame": 220,
+      "morph": 0.19924622675078477,
+      "vertices": 6710,
+      "faces": 6963
+    },
+    {
+      "frame": 221,
+      "morph": 0.2169618849200492,
+      "vertices": 6710,
+      "faces": 6963
+    },
+    {
+      "frame": 222,
+      "morph": 0.23523693532435475,
+      "vertices": 6704,
+      "faces": 6956
+    },
+    {
+      "frame": 223,
+      "morph": 0.2540748610412464,
+      "vertices": 6704,
+      "faces": 6956
+    },
+    {
+      "frame": 224,
+      "morph": 0.2734839284158272,
+      "vertices": 6710,
+      "faces": 6963
+    },
+    {
+      "frame": 225,
+      "morph": 0.29347662662789487,
+      "vertices": 7070,
+      "faces": 7323
+    },
+    {
+      "frame": 226,
+      "morph": 0.31407003835406777,
+      "vertices": 7551,
+      "faces": 7805
+    },
+    {
+      "frame": 227,
+      "morph": 0.3352866894959696,
+      "vertices": 7791,
+      "faces": 8045
+    },
+    {
+      "frame": 228,
+      "morph": 0.35715429242989455,
+      "vertices": 8744,
+      "faces": 8996
+    },
+    {
+      "frame": 229,
+      "morph": 0.37970818341976814,
+      "vertices": 9234,
+      "faces": 9492
+    },
+    {
+      "frame": 230,
+      "morph": 0.40299017895606715,
+      "vertices": 9230,
+      "faces": 9483
+    },
+    {
+      "frame": 231,
+      "morph": 0.42705270823400154,
+      "vertices": 9590,
+      "faces": 9843
+    },
+    {
+      "frame": 232,
+      "morph": 0.4519113835724479,
+      "vertices": 9590,
+      "faces": 9843
+    },
+    {
+      "frame": 233,
+      "morph": 0.4764792449971286,
+      "vertices": 9587,
+      "faces": 9843
+    },
+    {
+      "frame": 234,
+      "morph": 0.5003007165205422,
+      "vertices": 9340,
+      "faces": 9594
+    },
+    {
+      "frame": 235,
+      "morph": 0.5234182765777288,
+      "vertices": 9107,
+      "faces": 9363
+    },
+    {
+      "frame": 236,
+      "morph": 0.5458670198272728,
+      "vertices": 8260,
+      "faces": 8514
+    },
+    {
+      "frame": 237,
+      "morph": 0.5676815075862599,
+      "vertices": 8278,
+      "faces": 8534
+    },
+    {
+      "frame": 238,
+      "morph": 0.5888900003152443,
+      "vertices": 8264,
+      "faces": 8516
+    },
+    {
+      "frame": 239,
+      "morph": 0.6095117660191026,
+      "vertices": 8356,
+      "faces": 8606
+    },
+    {
+      "frame": 240,
+      "morph": 0.6294084278544976,
+      "vertices": 8382,
+      "faces": 8634
+    },
+    {
+      "frame": 241,
+      "morph": 0.6485550001547523,
+      "vertices": 8382,
+      "faces": 8634
+    },
+    {
+      "frame": 242,
+      "morph": 0.6670025874436952,
+      "vertices": 8382,
+      "faces": 8634
+    },
+    {
+      "frame": 243,
+      "morph": 0.6847933080962479,
+      "vertices": 8382,
+      "faces": 8634
+    },
+    {
+      "frame": 244,
+      "morph": 0.7019661060136646,
+      "vertices": 8382,
+      "faces": 8634
+    },
+    {
+      "frame": 245,
+      "morph": 0.7185519027517523,
+      "vertices": 8382,
+      "faces": 8634
+    },
+    {
+      "frame": 246,
+      "morph": 0.7345795635053741,
+      "vertices": 8382,
+      "faces": 8634
+    },
+    {
+      "frame": 247,
+      "morph": 0.7500943473150268,
+      "vertices": 8382,
+      "faces": 8634
+    },
+    {
+      "frame": 248,
+      "morph": 0.7654663118736198,
+      "vertices": 8384,
+      "faces": 8636
+    },
+    {
+      "frame": 249,
+      "morph": 0.7805982332918068,
+      "vertices": 8384,
+      "faces": 8636
+    },
+    {
+      "frame": 250,
+      "morph": 0.7951559490751146,
+      "vertices": 8384,
+      "faces": 8636
+    },
+    {
+      "frame": 251,
+      "morph": 0.809078787900383,
+      "vertices": 8384,
+      "faces": 8636
+    },
+    {
+      "frame": 252,
+      "morph": 0.822404948863003,
+      "vertices": 8384,
+      "faces": 8636
+    },
+    {
+      "frame": 253,
+      "morph": 0.8351679506707387,
+      "vertices": 8384,
+      "faces": 8636
+    },
+    {
+      "frame": 254,
+      "morph": 0.8473959123570809,
+      "vertices": 8384,
+      "faces": 8636
+    },
+    {
+      "frame": 255,
+      "morph": 0.8591130234395746,
+      "vertices": 8384,
+      "faces": 8636
+    },
+    {
+      "frame": 256,
+      "morph": 0.8703394396421895,
+      "vertices": 8384,
+      "faces": 8636
+    },
+    {
+      "frame": 257,
+      "morph": 0.8810920765531305,
+      "vertices": 8384,
+      "faces": 8636
+    },
+    {
+      "frame": 258,
+      "morph": 0.891384966324799,
+      "vertices": 8384,
+      "faces": 8632
+    },
+    {
+      "frame": 259,
+      "morph": 0.9012292915038614,
+      "vertices": 8384,
+      "faces": 8636
+    },
+    {
+      "frame": 260,
+      "morph": 0.9106342091307783,
+      "vertices": 8384,
+      "faces": 8636
+    },
+    {
+      "frame": 261,
+      "morph": 0.9196063991689978,
+      "vertices": 8384,
+      "faces": 8636
+    },
+    {
+      "frame": 262,
+      "morph": 0.9281502403349667,
+      "vertices": 8384,
+      "faces": 8636
+    },
+    {
+      "frame": 263,
+      "morph": 0.9362670334066604,
+      "vertices": 8384,
+      "faces": 8636
+    },
+    {
+      "frame": 264,
+      "morph": 0.943943232209098,
+      "vertices": 8384,
+      "faces": 8636
+    },
+    {
+      "frame": 265,
+      "morph": 0.9511535052694268,
+      "vertices": 8384,
+      "faces": 8636
+    },
+    {
+      "frame": 266,
+      "morph": 0.9578977560284005,
+      "vertices": 8384,
+      "faces": 8636
+    },
+    {
+      "frame": 267,
+      "morph": 0.9641769252040197,
+      "vertices": 8384,
+      "faces": 8636
+    },
+    {
+      "frame": 268,
+      "morph": 0.9699893787925494,
+      "vertices": 8384,
+      "faces": 8636
+    },
+    {
+      "frame": 269,
+      "morph": 0.9753308206406369,
+      "vertices": 8384,
+      "faces": 8636
+    },
+    {
+      "frame": 270,
+      "morph": 0.9801944617788502,
+      "vertices": 8384,
+      "faces": 8636
+    },
+    {
+      "frame": 271,
+      "morph": 0.9845705450056029,
+      "vertices": 8384,
+      "faces": 8634
+    },
+    {
+      "frame": 272,
+      "morph": 0.9884462708179765,
+      "vertices": 8384,
+      "faces": 8632
+    },
+    {
+      "frame": 273,
+      "morph": 0.9918055293327622,
+      "vertices": 8384,
+      "faces": 8632
+    },
+    {
+      "frame": 274,
+      "morph": 0.9946285439502055,
+      "vertices": 8384,
+      "faces": 8625
+    },
+    {
+      "frame": 275,
+      "morph": 0.9968912660709524,
+      "vertices": 8384,
+      "faces": 8612
+    },
+    {
+      "frame": 276,
+      "morph": 0.9985647726891428,
+      "vertices": 8356,
+      "faces": 8512
+    }
+  ],
+  "collision_frames": [],
+  "source_v16_sha256": "74f4829933088a2e6dc6a40bd08c41fc836073bac295ae3c7cb78b125d6ef960",
+  "source_v16_unchanged": true,
+  "samples": 512,
+  "shutter_degrees": 108,
+  "max_tracked_displacement_px": 11.92370353723765
+}

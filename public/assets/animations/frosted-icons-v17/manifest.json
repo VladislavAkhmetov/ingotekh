@@ -1,0 +1,68 @@
+{
+  "version": 17,
+  "frameCount": 360,
+  "firstFrame": 1,
+  "lastFrame": 360,
+  "fps": 30,
+  "durationSeconds": 12,
+  "format": "WebP",
+  "colorSpace": "sRGB",
+  "hasAlpha": true,
+  "alphaLossless": true,
+  "backgroundBakedIntoFrames": false,
+  "suggestedBackgroundCss": "#27292B",
+  "sourceGrade": "v16 / Figma approved",
+  "variants": [
+    {
+      "id": "webp_1280",
+      "width": 1280,
+      "height": 1280,
+      "quality": 80,
+      "totalBytes": 14525122,
+      "budgetBytes": 18000000,
+      "urlPattern": "webp_1280/frame_{frame:04d}.webp"
+    },
+    {
+      "id": "webp_768",
+      "width": 768,
+      "height": 768,
+      "quality": 54,
+      "totalBytes": 7927340,
+      "budgetBytes": 8000000,
+      "urlPattern": "webp_768/frame_{frame:04d}.webp"
+    }
+  ],
+  "anchors": [
+    1,
+    180,
+    360
+  ],
+  "morphFrames": [
+    202,
+    276
+  ],
+  "spinFrames": [
+    180,
+    300
+  ],
+  "cameraFixed": true,
+  "shutterDegrees": 108,
+  "maxTrackedPointMotionPxAt1280": 11.92370353723765,
+  "scroll": {
+    "referenceWidth": 1440,
+    "referenceDistancePx": 1200,
+    "maxDistancePx": 2100,
+    "translationFrames": [
+      60,
+      180
+    ],
+    "translation": "Website container, not baked into camera"
+  },
+  "framePositionFormula": "1 + clamp(progress,0,1) * 359",
+  "frameBlend": "Premultiplied weighted sum of floor and ceil frames; do not source-over two partially opaque images.",
+  "verification": {
+    "allFilesDecode": true,
+    "allAlphaChannelsLossless": true,
+    "budgetsPassed": true
+  }
+}
